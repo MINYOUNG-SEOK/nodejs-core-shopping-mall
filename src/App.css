@@ -298,7 +298,7 @@ body {
 /* 메인 콘텐츠 영역 조정 */
 .main-content {
   margin-left: 130px;
-  padding: 20px;
+  padding: 100px 20px 20px 20px;
   min-height: calc(100vh - 80px);
   background-color: #ffffff;
 }
