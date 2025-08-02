@@ -6,6 +6,7 @@ import {
   faBox,
   faSearch,
   faShoppingBag,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -17,16 +18,8 @@ const Navbar = ({ user }) => {
   const { cartItemCount } = useSelector((state) => state.cart);
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
-  const menuList = [
-    "여성",
-    "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
-    "H&M HOME",
-    "Sale",
-    "지속가능성",
-  ];
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const menuList = ["All", "Outer", "Top", "Pants", "Acc"];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
   const onCheckEnter = (event) => {
@@ -79,73 +72,93 @@ const Navbar = ({ user }) => {
         </Link>
       )}
       <div className="nav-header">
-        <div className="burger-menu hide">
-          <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
+        <div className="nav-left">
+          <div
+            className="mobile-menu-toggle"
+            onClick={() => setShowMobileMenu(true)}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+          <div className="nav-logo">
+            <Link to="/">
+              <span className="brand-logo">core</span>
+            </Link>
+          </div>
         </div>
 
-        <div>
+        <div className="nav-right-menu">
           <div className="display-flex">
             {user ? (
               <div onClick={handleLogout} className="nav-icon">
-                <FontAwesomeIcon icon={faUser} />
-                {!isMobile && (
-                  <span style={{ cursor: "pointer" }}>로그아웃</span>
-                )}
+                <span style={{ cursor: "pointer" }}>LOGOUT</span>
               </div>
             ) : (
               <div onClick={() => navigate("/login")} className="nav-icon">
-                <FontAwesomeIcon icon={faUser} />
-                {!isMobile && <span style={{ cursor: "pointer" }}>로그인</span>}
+                <span style={{ cursor: "pointer" }}>LOGIN</span>
               </div>
             )}
-            <div onClick={() => navigate("/cart")} className="nav-icon">
-              <FontAwesomeIcon icon={faShoppingBag} />
-              {!isMobile && (
-                <span style={{ cursor: "pointer" }}>{`쇼핑백(${
-                  cartItemCount || 0
-                })`}</span>
-              )}
-            </div>
             <div
               onClick={() => navigate("/account/purchase")}
               className="nav-icon"
             >
-              <FontAwesomeIcon icon={faBox} />
-              {!isMobile && <span style={{ cursor: "pointer" }}>내 주문</span>}
+              <span style={{ cursor: "pointer" }}>ORDER</span>
             </div>
-            {isMobile && (
-              <div className="nav-icon" onClick={() => setShowSearchBox(true)}>
-                <FontAwesomeIcon icon={faSearch} />
-              </div>
-            )}
+            <div onClick={() => navigate("/cart")} className="nav-icon">
+              <span style={{ cursor: "pointer" }}>{`CART ${
+                cartItemCount || 0
+              }`}</span>
+            </div>
+            <div className="nav-icon">
+              <span style={{ cursor: "pointer" }}>SEARCH</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="nav-logo">
-        <Link to="/">
-          <img width={100} src="/image/hm-logo.png" alt="hm-logo.png" />
-        </Link>
-      </div>
-      <div className="nav-menu-area">
-        <ul className="menu">
+      <div className="nav-sidebar">
+        <ul className="sidebar-menu">
           {menuList.map((menu, index) => (
             <li key={index}>
               <Link to={`/products?category=${menu}`}>{menu}</Link>
             </li>
           ))}
         </ul>
-        {!isMobile && ( // admin페이지에서 같은 search-box스타일을 쓰고있음 그래서 여기서 서치박스 안보이는것 처리를 해줌
-          <div className="search-box landing-search-box ">
-            <FontAwesomeIcon icon={faSearch} />
-            <input
-              type="text"
-              placeholder="제품검색"
-              onKeyPress={onCheckEnter}
-            />
-          </div>
-        )}
       </div>
+
+      {/* 모바일 메뉴 오버레이 */}
+      {showMobileMenu && (
+        <div
+          className="mobile-menu-overlay"
+          onClick={() => setShowMobileMenu(false)}
+        >
+          <div
+            className="mobile-menu-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mobile-menu-header">
+              <span className="brand-logo">core</span>
+              <button
+                className="mobile-menu-close"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
+            <ul className="mobile-menu-list">
+              {menuList.map((menu, index) => (
+                <li key={index}>
+                  <Link
+                    to={`/products?category=${menu}`}
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {menu}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

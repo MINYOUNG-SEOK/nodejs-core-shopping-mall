@@ -36,6 +36,7 @@ const Login = () => {
   return (
     <>
       <Container className="login-area">
+        <h2>로그인</h2>
         {loginError && (
           <div className="error-message">
             <Alert variant="danger">{loginError}</Alert>
@@ -43,10 +44,10 @@ const Login = () => {
         )}
         <Form className="login-form" onSubmit={handleLoginWithEmail}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="이메일을 입력해주세요"
               required
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -56,21 +57,20 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="비밀번호를 입력해주세요"
               required
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group>
-          <div className="display-space-between login-button-area">
-            <Button variant="danger" type="submit">
-              Login
-            </Button>
-            <div>
-              아직 계정이 없으세요?<Link to="/register">회원가입 하기</Link>{" "}
-            </div>
+          <Button variant="dark" type="submit">
+            로그인
+          </Button>
+
+          <div className="register-link">
+            아직 계정이 없으세요? <Link to="/register">회원가입 하기</Link>
           </div>
 
-          <div className="text-align-center mt-2">
+          <div className="google-login-section">
             <p>-외부 계정으로 로그인하기-</p>
             <div className="display-center">
               <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

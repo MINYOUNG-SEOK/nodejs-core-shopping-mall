@@ -1,3 +1,254 @@
-.register-area{
-    max-width: 550px;
+.register-area {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
 }
+
+.register-area h2 {
+    text-align: left;
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    font-size: 1.8rem;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.register-area .form-label {
+    font-weight: 500;
+    color: #000000;
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: normal;
+    display: flex;
+    align-items: center;
+}
+
+.register-area .form-label::after {
+    content: " *";
+    color: #ff0000;
+    margin-left: 2px;
+}
+
+.register-area .form-control {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    background: #ffffff;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.register-area .form-control:focus {
+    border-color: #000000;
+    box-shadow: none;
+    background: #ffffff;
+    transform: none;
+    outline: none;
+}
+
+.register-area .form-control::placeholder {
+    color: #999999;
+    font-style: normal;
+    font-size: 0.9rem;
+}
+
+.register-area .form-check {
+    margin: 1rem 0;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+    transition: none;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.register-area .form-check:hover {
+    background: none;
+    transform: none;
+}
+
+.register-area .form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0.4rem;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    transition: none;
+    background-color: #ffffff;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.register-area .form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+    transform: none;
+}
+
+.register-area .form-check-label {
+    color: #000000;
+    font-weight: 400;
+    margin-left: 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.register-area .btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0;
+    border: none;
+    background: #000000;
+    color: #ffffff;
+    transition: background-color 0.2s ease;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: 1rem;
+    position: relative;
+    overflow: visible;
+    border-radius: 4px;
+}
+
+.register-area .btn::before {
+    display: none;
+}
+
+.register-area .btn:hover::before {
+    display: none;
+}
+
+.register-area .btn:hover {
+    transform: none;
+    box-shadow: none;
+    background: #333333;
+}
+
+.register-area .btn:active {
+    transform: none;
+}
+
+.register-area .alert {
+    border-radius: 0;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    box-shadow: none;
+    background: #f8f8f8;
+    color: #000000;
+}
+
+.register-area .alert-danger {
+    background: #f8f8f8;
+    color: #ff0000;
+    border-left: 3px solid #ff0000;
+}
+
+.register-area .form-control.is-invalid {
+    border-color: #ff0000;
+    box-shadow: none;
+    animation: none;
+}
+
+.register-area .form-check.is-invalid {
+    border-color: #ff0000;
+    background: none;
+}
+
+.register-area .invalid-feedback {
+    color: #ff0000;
+    font-weight: 400;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    border-left: none;
+}
+
+/* 약관 동의 섹션 스타일 */
+.terms-section {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.terms-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.terms-item {
+    display: flex;
+    align-items: center;
+    margin: 0.75rem 0;
+    padding: 0.5rem 0;
+}
+
+.terms-item .form-check {
+    margin: 0;
+    padding: 0;
+}
+
+.terms-item .form-check-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.terms-item .terms-link {
+    color: #000000;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: auto;
+}
+
+.terms-item .terms-link:hover {
+    text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .register-area {
+        padding: 1rem 0;
+        max-width: 100%;
+    }
+
+    .register-area h2 {
+        font-size: 1.6rem;
+    }
+
+    .register-area .btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* 다크 모드 지원 제거 - 미니멀 디자인 유지 */

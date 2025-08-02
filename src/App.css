@@ -1,102 +1,167 @@
-body{
+body {
   font-family: sans-serif;
-  background-color: #FAF9F8;
+  background-color: #ffffff;
 }
-.nav-header{
-  display:flex;
+
+.nav-header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
-  margin-top: 40px;
-  
+  padding: 20px 40px;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .nav-header .nav-icon {
-  margin-right: 20px;
- 
-}
-.nav-icon span{
-  margin-left: 10px;
-}
-.menu{
-  display: flex;
-  list-style-type: none;
-  padding: 20px;
-}
-.menu li a{
-  text-decoration: none;
-  color:black;
-  margin-left:20px;
+  margin-right: 30px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.nav-logo{
+.nav-icon span {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-icon span:hover {
+  color: #666666;
+}
+
+.brand-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: none;
+}
+
+.nav-logo a {
+  text-decoration: none;
+}
+
+.nav-right-menu {
   display: flex;
-  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 80px;
+  width: 130px;
+  height: calc(100vh - 80px);
+  padding: 20px 40px;
+}
+
+.sidebar-menu li {
   margin-bottom: 20px;
 }
-.nav-menu-area{
-  display: flex;
-  justify-content: center;
+
+.sidebar-menu li a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
 }
-.burger-menu{
+
+.sidebar-menu li a:hover {
+  color: #666666;
+}
+
+.nav-sidebar {
+  position: fixed;
+  left: 0;
+  top: 80px;
+  width: 130px;
+  height: calc(100vh - 80px);
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+.burger-menu {
   margin-left: 20px;
 }
 
-.landing-search-box{
+.landing-search-box {
   right: 20px;
   position: absolute;
 
 }
-.sidebar{
+
+.sidebar {
   max-width: 500px;
 }
 
-.search-box{
+.search-box {
   border-bottom: 1px solid black;
   /* position: absolute; */
   padding: 5px;
 }
-.search-box input{
-  border:none;
-  margin-left:5px;
-  background-color: #FAF9F8;
+
+.search-box input {
+  border: none;
+  margin-left: 5px;
+  background-color: #ffffff;
 }
+
 .search-box input:focus {
-  outline:none
+  outline: none
 }
-.mobile-search-box{
- position: relative;
- top:10px;
- left:10px;
+
+.mobile-search-box {
+  position: relative;
+  top: 10px;
+  left: 10px;
 }
-.search{
+
+.search {
   align-items: center;
 
 }
-.search-icon{
+
+.search-icon {
   margin-left: 10px;
 }
-.search input{
+
+.search input {
   border: none;
-  background-color: #FAF9F8;
+  background-color: #ffffff;
   padding-left: 20px;
 }
-.search input:focus{
-  outline:none
+
+.search input:focus {
+  outline: none
 }
-.mobile-search-box .closebtn{
+
+.mobile-search-box .closebtn {
   font-size: 36px;
   border: none;
   background: none;
   padding-right: 30px;
 }
-.card{
-  border:none !important;
+
+.card {
+  border: none !important;
   margin-bottom: 10px;
 }
 
-.choice{
-  font-size:11px;
+.choice {
+  font-size: 11px;
   color: #63786a;
   font-weight: bold;
   height: 20px;
@@ -107,32 +172,34 @@ body{
   height: 20px;
 }
 
-.error-message{
+.error-message {
   text-align: left;
   width: 100%;
-  
+
 }
+
 .form-control:valid {
-  background-color:  white !important;
+  background-color: white !important;
 }
 
 
 
-.drop-down{
-  margin-top:20px;
+.drop-down {
+  margin-top: 20px;
 }
 
-.add-button{
-  margin-top:20px;
+.add-button {
+  margin-top: 20px;
   width: 100%;
 }
 
-.card:hover{
+.card:hover {
   transform: scale(1.1);
   z-index: 1;
 }
-.hide{
-  visibility:hidden
+
+.hide {
+  visibility: hidden
 }
 
 
@@ -147,7 +214,7 @@ body{
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-  z-index:2;
+  z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
 }
@@ -179,99 +246,311 @@ body{
 .side-menu-list button:hover {
   background-color: beige;
   border-radius: 3px;
-} 
+}
 
 
-#sidebar-wrapper{
+#sidebar-wrapper {
   min-height: 100vh !important;
   background-color: red;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); */
   /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
-   /* width: 100vw; */
- /* margin-left: -1rem;
+  /* width: 100vw; */
+  /* margin-left: -1rem;
   -webkit-transition: margin .25s ease-out;
   -moz-transition: margin .25s ease-out;
   -o-transition: margin .25s ease-out;
   transition: margin .25s ease-out; */
 }
-.sidebar-item{
-  color:black;
+
+.sidebar-item {
+  color: black;
   font-weight: bold;
   padding: 20px 10px;
   list-style-type: none;
-  
 
-  
+
+
 }
-.sidebar-item:hover{
-  color:white;
+
+.sidebar-item:hover {
+  color: white;
   background-color: red;
   font-weight: bold;
 }
-.sidebar-area{
+
+.sidebar-area {
   padding-left: 0;
 }
-.sidebar{
+
+.sidebar {
   max-width: 300px;
-  padding:20px;
-  background-color: rgb(248,249,250);
+  padding: 20px;
+  background-color: rgb(248, 249, 250);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   padding-left: 40px;
 }
-.mobile-sidebar-toggle{
-  display:none;
+
+.mobile-sidebar-toggle {
+  display: none;
 }
 
+/* 메인 콘텐츠 영역 조정 */
+.main-content {
+  margin-left: 130px;
+  padding: 20px;
+  min-height: calc(100vh - 80px);
+  background-color: #ffffff;
+}
 
-@media screen and (max-width: 63rem) {
-  .hide {
-    visibility:visible;
-  }
-  .menu {
+/* 컨테이너 조정 */
+.container {}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .nav-sidebar {
     display: none;
   }
- 
-  .nav-icon:last-child{
-    margin-right: 0px;
-  }
-  .nav-header{
-    margin-top: 20px;
-    margin-bottom:30px
-  }
 
-  .sidebar-toggle{
+  .sidebar-menu {
     display: none;
   }
-  .mobile-sidebar-toggle{
-    display:block;
+
+  .main-content {
+    margin-left: 0;
+    padding-top: 80px;
   }
-  .sidebar{
-    max-width: 100%;
-    padding:0px;
-    /* margin-bottom: 0; */
+
+  .container {
+    margin-left: 0;
+    /* margin-top: 60px; */
   }
-  .mobile-sidebar{
-    max-height: 104px;
+
+  .nav-header {
+    padding: 15px 20px;
+  }
+
+  .nav-header .nav-icon {
+    margin-right: 15px;
+  }
+
+  .mobile-menu-toggle {
+    display: block !important;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+  }
+
+  /* 햄버거 메뉴가 보일 때 로고 숨기기 */
+  .nav-logo {
+    display: none;
+  }
+
+  .nav-right-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  /* 모바일에서 우측 메뉴 아이템 줄이기 */
+  .nav-right-menu .nav-icon {
+    margin-right: 10px;
+  }
+
+  .nav-right-menu .nav-icon:last-child {
+    margin-right: 0;
   }
 }
-.display-flex{
-  display:flex;
+
+.display-flex {
+  display: flex;
   align-items: center;
 
 }
 
-.admin-layout{
+.admin-layout {
   display: flex;
 }
 
-.landing-search-box input{
+.landing-search-box input {
   background-color: #FAF9F8;
 }
 
-.link-area{
+.link-area {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
   margin-right: 20px;
+}
+
+/* 모바일 메뉴 토글 버튼 */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #000000;
+  margin-right: 15px;
+}
+
+/* 메인페이지에서 햄버거 메뉴 색상 변경 */
+.main-page .mobile-menu-toggle {
+  color: #ffffff !important;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+/* 모바일 메뉴 오버레이 */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.mobile-menu-content {
+  width: 280px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #000000;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile-menu-close:hover {
+  color: #666666;
+}
+
+.mobile-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.mobile-menu-list li a {
+  display: block;
+  padding: 10px 20px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease;
+}
+
+/* 메인페이지 전용 스타일 */
+.main-page {
+  background-image: url('https://image.hm.com/assets/hm/50/e8/50e829db2ba411231dafd57719bba12bb528dc1c.jpg?imwidth=1800');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* 메인페이지에서 헤더와 사이드바를 투명하게 */
+.main-page .nav-header,
+.main-page .nav-sidebar,
+.main-page .sidebar-menu,
+.main-page .main-content,
+.main-page .container {
+  background-color: transparent !important;
+}
+
+.main-page .nav-header {
+  border-bottom: none;
+  box-shadow: none;
+  z-index: 1001;
+}
+
+.main-page .brand-logo {
+  color: #ffffff !important;
+}
+
+.main-page .nav-icon span {
+  color: #ffffff !important;
+}
+
+.main-page .nav-icon span:hover {
+  color: #e0e0e0 !important;
+}
+
+.main-page .sidebar-menu li a {
+  color: #ffffff !important;
+}
+
+.main-page .sidebar-menu li a:hover {
+  color: #e0e0e0 !important;
+}
+
+.main-page .main-content {
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.main-page .container {
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+/* 메인페이지에서만 적용되는 스타일 */
+.main-page .card {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000000;
+}
+
+.main-page .card:hover {
+  background-color: rgba(255, 255, 255, 1);
 }

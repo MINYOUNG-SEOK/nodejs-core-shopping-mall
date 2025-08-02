@@ -39,7 +39,6 @@ const RegisterPage = () => {
   };
 
   const handleChange = (event) => {
-    event.preventDefault();
     let { id, value, type, checked } = event.target;
     if (id === "confirmPassword" && passwordError) setPasswordError("");
     if (type === "checkbox") {
@@ -52,6 +51,7 @@ const RegisterPage = () => {
 
   return (
     <Container className="register-area">
+      <h2>회원가입</h2>
       {registrationError && (
         <div>
           <Alert variant="danger" className="error-message">
@@ -114,7 +114,7 @@ const RegisterPage = () => {
             checked={formData.policy}
           />
         </Form.Group>
-        <Button variant="danger" type="submit">
+        <Button variant="dark" type="submit">
           회원가입
         </Button>
       </Form>

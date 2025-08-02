@@ -13,6 +13,11 @@ const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
+
+  // 메인페이지인지 확인
+  const isMainPage =
+    location.pathname === "/" || location.pathname === "/products";
+
   useEffect(() => {
     dispatch(loginWithToken());
   }, [dispatch]);
@@ -21,8 +26,9 @@ const AppLayout = ({ children }) => {
       dispatch(getCartQty());
     }
   }, [user, dispatch]);
+
   return (
-    <div>
+    <div className={isMainPage ? "main-page" : ""}>
       <ToastMessage />
       {location.pathname.includes("admin") ? (
         <Row className="vh-100">
@@ -36,7 +42,7 @@ const AppLayout = ({ children }) => {
       ) : (
         <>
           <Navbar user={user} />
-          {children}
+          <div className="main-content">{children}</div>
         </>
       )}
     </div>

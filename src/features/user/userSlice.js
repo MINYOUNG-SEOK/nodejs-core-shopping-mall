@@ -25,7 +25,19 @@ export const loginWithGoogle = createAsyncThunk(
   async (token, { rejectWithValue }) => {}
 );
 
-export const logout = () => (dispatch) => {};
+export const logout = () => (dispatch) => {
+  // 로컬 스토리지에서 토큰 제거
+  localStorage.removeItem("token");
+  // 사용자 상태 초기화
+  dispatch(clearUser());
+  // 성공 메시지 표시
+  dispatch(
+    showToastMessage({
+      message: "로그아웃되었습니다.",
+      status: "success",
+    })
+  );
+};
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (
@@ -79,6 +91,12 @@ const userSlice = createSlice({
       state.loginError = null;
       state.registrationError = null;
     },
+    clearUser: (state) => {
+      state.user = null;
+      state.loginError = null;
+      state.registrationError = null;
+      state.success = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -106,5 +124,5 @@ const userSlice = createSlice({
       });
   },
 });
-export const { clearErrors } = userSlice.actions;
+export const { clearErrors, clearUser } = userSlice.actions;
 export default userSlice.reducer;
