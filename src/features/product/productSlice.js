@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../utils/api";
-import { showToastMessage } from "../common/uiSlice";
+// import api from "../../utils/api";
+// import { showToastMessage } from "../common/uiSlice";
 
 // 비동기 액션 생성
 export const getProductList = createAsyncThunk(

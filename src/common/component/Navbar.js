@@ -131,7 +131,7 @@ const Navbar = ({ user }) => {
         <ul className="menu">
           {menuList.map((menu, index) => (
             <li key={index}>
-              <a href="#">{menu}</a>
+              <Link to={`/products?category=${menu}`}>{menu}</Link>
             </li>
           ))}
         </ul>

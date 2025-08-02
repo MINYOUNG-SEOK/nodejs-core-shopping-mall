@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../utils/api";
-import { showToastMessage } from "../common/uiSlice";
+// import api from "../../utils/api";
+// import { showToastMessage } from "../common/uiSlice";
 
 const initialState = {
   loading: false,

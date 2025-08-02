@@ -20,7 +20,7 @@ const AppLayout = ({ children }) => {
     if (user) {
       dispatch(getCartQty());
     }
-  }, [dispatch]);
+  }, [user, dispatch]);
   return (
     <div>
       <ToastMessage />
