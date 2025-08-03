@@ -75,22 +75,33 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const handleChange = (event) => {
     //form에 데이터 넣어주기
+    const { id, value } = event.target;
+    setFormData({ ...formData, [id]: value });
   };
 
   const addStock = () => {
     //재고타입 추가시 배열에 새 배열 추가
+    setStock([...stock, ["", ""]]);
   };
 
   const deleteStock = (idx) => {
     //재고 삭제하기
+    const newStock = stock.filter((item, index) => index !== idx);
+    setStock(newStock);
   };
 
   const handleSizeChange = (value, index) => {
     //  재고 사이즈 변환하기
+    const newStock = [...stock];
+    newStock[index][0] = value;
+    setStock(newStock);
   };
 
   const handleStockChange = (value, index) => {
     //재고 수량 변환하기
+    const newStock = [...stock];
+    newStock[index][1] = value;
+    setStock(newStock);
   };
 
   const onHandleCategory = (event) => {
@@ -185,12 +196,11 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
                     required
                     defaultValue={item[0] ? item[0].toLowerCase() : ""}
                   >
-                    <option value="" disabled selected hidden>
+                    <option value="" disabled hidden>
                       Please Choose...
                     </option>
                     {SIZE.map((item, index) => (
                       <option
-                        inValid={true}
                         value={item.toLowerCase()}
                         disabled={stock.some(
                           (size) => size[0] === item.toLowerCase()
@@ -209,7 +219,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
                     }
                     type="number"
                     placeholder="number of stock"
-                    value={item[1]}
+                    value={item[1] || ""}
                     required
                   />
                 </Col>
