@@ -13,23 +13,23 @@ const Sidebar = () => {
 
   const NavbarContent = () => {
     return (
-      <div>
-        <Link to="/">
-          <img width={100} src="/image/hm-logo.png" alt="hm-logo.png" />
+      <div className="admin-sidebar-content">
+        <Link to="/" className="admin-logo-link">
+          <span className="brand-logo">core</span>
         </Link>
-        <div className="sidebar-item">Admin Account</div>
-        <ul className="sidebar-area">
+        <div className="admin-account-title">Admin Account</div>
+        <ul className="admin-sidebar-menu">
           <li
-            className="sidebar-item"
+            className="admin-sidebar-item"
             onClick={() => handleSelectMenu("/admin/product?page=1")}
           >
-            product
+            상품 관리
           </li>
           <li
-            className="sidebar-item"
+            className="admin-sidebar-item"
             onClick={() => handleSelectMenu("/admin/order?page=1")}
           >
-            order
+            주문 관리
           </li>
         </ul>
       </div>
@@ -41,7 +41,7 @@ const Sidebar = () => {
 
       <Navbar bg="light" expand={false} className="mobile-sidebar-toggle">
         <Container fluid>
-          <img width={80} src="/image/hm-logo.png" alt="hm-logo.png" />
+          <span className="brand-logo">core</span>
           <Navbar.Brand href="#"></Navbar.Brand>
           <Navbar.Toggle
             aria-controls={`offcanvasNavbar-expand`}

@@ -62,22 +62,27 @@ const AdminOrderPage = () => {
   };
 
   return (
-    <div className="locate-center">
-      <Container>
-        <div className="mt-2 display-center mb-2">
+    <div className="admin-order-page">
+      <div className="admin-order-container">
+        <h1 className="admin-order-title">주문 관리</h1>
+
+        <div className="admin-order-search-section">
           <SearchBox
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
-            placeholder="오더번호"
+            placeholder="주문 번호로 검색"
             field="ordernum"
           />
         </div>
 
-        <OrderTable
-          header={tableHeader}
-          data={orderList}
-          openEditForm={openEditForm}
-        />
+        <div className="admin-order-table-container">
+          <OrderTable
+            header={tableHeader}
+            data={orderList}
+            openEditForm={openEditForm}
+          />
+        </div>
+
         <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}
@@ -95,11 +100,11 @@ const AdminOrderPage = () => {
           breakLabel="..."
           breakClassName="page-item"
           breakLinkClassName="page-link"
-          containerClassName="pagination"
+          containerClassName="admin-order-pagination"
           activeClassName="active"
           className="display-center list-style-none"
         />
-      </Container>
+      </div>
 
       {open && <OrderDetailDialog open={open} handleClose={handleClose} />}
     </div>

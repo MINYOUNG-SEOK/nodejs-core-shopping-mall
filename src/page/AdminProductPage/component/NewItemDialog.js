@@ -58,7 +58,10 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const handleClose = () => {
     //모든걸 초기화시키고;
-    // 다이얼로그 닫아주기
+    setFormData({ ...InitialFormData });
+    setStock([]);
+    setStockError(false);
+    setShowDialog(false);
   };
 
   const handleSubmit = (event) => {
@@ -131,11 +134,14 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const uploadImage = (url) => {
     //이미지 업로드
-    setFormData({ ...formData, image: url });
+    setFormData((prevData) => {
+      const newData = { ...prevData, image: url };
+      return newData;
+    });
   };
 
   return (
-    <Modal show={showDialog} onHide={handleClose}>
+    <Modal show={showDialog} onHide={handleClose} className="admin-modal">
       <Modal.Header closeButton>
         {mode === "new" ? (
           <Modal.Title>Create New Product</Modal.Title>
@@ -196,7 +202,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
           </Button>
           <div className="mt-2">
             {stock.map((item, index) => (
-              <Row key={index}>
+              <Row key={index} className="stock-row">
                 <Col sm={4}>
                   <Form.Select
                     onChange={(event) =>
@@ -232,7 +238,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
                     required
                   />
                 </Col>
-                <Col sm={2}>
+                <Col sm={2} className="stock-delete-btn">
                   <Button
                     variant="danger"
                     size="sm"
@@ -250,12 +256,28 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
           <Form.Label>Image</Form.Label>
           <CloudinaryUploadWidget uploadImage={uploadImage} />
 
-          <img
-            id="uploadedimage"
-            src={formData.image}
-            className="upload-image mt-2"
-            alt="uploadedimage"
-          />
+          {formData.image && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                marginTop: "10px",
+              }}
+            >
+              <div className="image-preview-container">
+                <img
+                  src={formData.image}
+                  className="upload-image"
+                  alt="uploaded image"
+                  onLoad={() => console.log("Image loaded successfully")}
+                  onError={(e) => {
+                    console.log("Image load failed");
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+            </div>
+          )}
         </Form.Group>
 
         <Row className="mb-3">

@@ -11,6 +11,7 @@ import {
   deleteProduct,
   setSelectedProduct,
 } from "../../features/product/productSlice";
+import "./style/adminProduct.style.css";
 
 const AdminProductPage = () => {
   const navigate = useNavigate();
@@ -63,9 +64,11 @@ const AdminProductPage = () => {
   };
 
   return (
-    <div className="locate-center">
-      <Container>
-        <div className="mt-2">
+    <div className="admin-product-page">
+      <div className="admin-product-container">
+        <h1 className="admin-page-title">상품 관리</h1>
+
+        <div className="admin-search-section">
           <SearchBox
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
@@ -73,16 +76,20 @@ const AdminProductPage = () => {
             field="name"
           />
         </div>
-        <Button className="mt-2 mb-2" onClick={handleClickNewItem}>
+
+        <Button className="admin-add-button" onClick={handleClickNewItem}>
           Add New Item +
         </Button>
 
-        <ProductTable
-          header={tableHeader}
-          data=""
-          deleteItem={deleteItem}
-          openEditForm={openEditForm}
-        />
+        <div className="admin-table-container">
+          <ProductTable
+            header={tableHeader}
+            data=""
+            deleteItem={deleteItem}
+            openEditForm={openEditForm}
+          />
+        </div>
+
         <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}
@@ -100,11 +107,11 @@ const AdminProductPage = () => {
           breakLabel="..."
           breakClassName="page-item"
           breakLinkClassName="page-link"
-          containerClassName="pagination"
+          containerClassName="admin-pagination"
           activeClassName="active"
           className="display-center list-style-none"
         />
-      </Container>
+      </div>
 
       <NewItemDialog
         mode={mode}

@@ -50,7 +50,7 @@ const ProductTable = ({ header, data, deleteItem, openEditForm }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={header.length} style={{ textAlign: "center" }}>
+              <td colSpan={header.length} className="admin-no-data">
                 No Data to show
               </td>
             </tr>

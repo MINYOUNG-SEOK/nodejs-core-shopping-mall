@@ -1,3 +1,203 @@
-.modal-dialog{
-    max-width: 700px;
+.admin-order-page {
+    background-color: #ffffff;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+.admin-order-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.admin-order-title {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.admin-order-search-section {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.admin-order-search-section .search-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+}
+
+.admin-order-search-section .search-box:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.admin-order-table-container {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+.admin-order-table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.admin-order-table th {
+    background-color: #f8f8f8;
+    color: #000000;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 15px;
+    font-size: 0.8rem;
+}
+
+.admin-order-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+.admin-order-table tbody tr:hover {
+    background-color: #f8f8f8;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.admin-order-action-button {
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 0;
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    margin: 0 3px;
+    color: #ffffff;
+}
+
+.admin-order-action-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.admin-order-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.admin-order-pagination .page-link {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #000000;
+    margin: 0 2px;
+    border-radius: 0;
+    padding: 12px 16px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.admin-order-pagination .page-link:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.admin-order-pagination .active .page-link {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.order-status-pending {
+    background-color: #f0f0f0;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: 1px solid #e0e0e0;
+}
+
+.order-status-shipped {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: 1px solid #c8e6c9;
+}
+
+.order-status-delivered {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: 1px solid #bbdefb;
+}
+
+.order-status-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: 1px solid #ffcdd2;
+}
+
+.admin-no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666666;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .admin-order-container {
+        padding: 40px 20px;
+    }
+
+    .admin-order-title {
+        font-size: 1.5rem;
+    }
+
+    .admin-order-table th,
+    .admin-order-table td {
+        padding: 15px 10px;
+        font-size: 0.8rem;
+    }
 }

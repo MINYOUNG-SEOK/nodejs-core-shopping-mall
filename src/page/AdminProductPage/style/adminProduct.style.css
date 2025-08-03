@@ -1,50 +1,468 @@
-.card-area{
-    margin-top:20px;
-}
-.admin-product-card{
-    border:1px solid red;
-
-}
-.tag{
-    margin-left:10px
+.admin-product-page {
+    background-color: #ffffff;
+    min-height: 100vh;
+    font-family: sans-serif;
 }
 
-.display-flex{
-    display:flex;
-    align-items: center;
+.admin-product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
 }
-.locate-center{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.admin-page-title {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.admin-search-section {
+    margin-bottom: 40px;
+}
+
+.admin-search-section .search-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+}
+
+.admin-search-section .search-box:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.admin-add-button {
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 0;
+    padding: 12px 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    margin-bottom: 30px;
+    border-radius: 4px;
+}
+
+.admin-add-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.admin-table-container {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+.admin-table {
+    margin-bottom: 0;
     width: 100%;
 }
-.stock{
-    margin-right: 10px;
+
+.admin-table th {
+    background-color: #f8f8f8;
+    color: #000000;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 15px;
+    font-size: 0.8rem;
 }
 
+.admin-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: #333333;
+}
 
-.mt-2{
+.admin-table tbody tr:hover {
+    background-color: #f8f8f8;
+    transition: background-color 0.2s ease;
+}
+
+.admin-action-button {
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 0;
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    margin: 0 3px;
+    color: #ffffff;
+}
+
+.admin-action-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.admin-edit-button {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+.admin-edit-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.admin-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.admin-pagination .page-link {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #000000;
+    margin: 0 2px;
+    border-radius: 0;
+    padding: 12px 16px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.admin-pagination .page-link:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.admin-pagination .active .page-link {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+/* No Data 메시지 스타일 */
+.admin-no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666666;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+
+/* 모달 스타일 - core de 컨셉 */
+.admin-modal {
+    margin: 20px;
+}
+
+.admin-modal .modal-dialog {
+    max-width: 700px;
+    margin: 20px auto;
+    width: 90%;
+}
+
+.admin-modal .modal-content {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-modal .modal-header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-modal .modal-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.admin-modal .modal-header .btn-close {
+    background: none !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    color: #000000 !important;
+    opacity: 1 !important;
+    transition: opacity 0.2s ease;
+    cursor: pointer !important;
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.admin-modal .modal-header .btn-close:hover {
+    opacity: 0.7 !important;
+    color: #666666 !important;
+}
+
+.admin-modal .modal-header .btn-close::before,
+.admin-modal .modal-header .btn-close::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    width: 2px !important;
+    height: 20px !important;
+    background-color: #000000 !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.admin-modal .modal-header .btn-close::before {
+    transform: translate(-50%, -50%) rotate(45deg) !important;
+}
+
+.admin-modal .modal-header .btn-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg) !important;
+}
+
+.admin-modal .modal-body {
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+.admin-modal .form-container {
+    padding: 20px;
+}
+
+.admin-modal .form-group {
+    margin-bottom: 25px;
+}
+
+.admin-modal .mb-3 {
+    margin-bottom: 25px !important;
+}
+
+.admin-modal .form-label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.admin-modal .form-control,
+.admin-modal .form-select {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-modal .form-control:focus,
+.admin-modal .form-select:focus {
+    border-color: #000000;
+    box-shadow: none;
+    outline: none;
+}
+
+.admin-modal .btn {
+    border-radius: 0;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 12px 14px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 4px;
+}
+
+.admin-modal .btn-primary {
+    background-color: #000000;
+    border: 1px solid #000000;
+    color: #ffffff;
+}
+
+.admin-modal .btn-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.admin-modal .btn-danger {
+    background-color: #ffffff;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.admin-modal .btn-danger:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+/* 재고 삭제 버튼 중앙 정렬 */
+.admin-modal .stock-delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    min-height: 38px;
+    padding: 0;
+}
+
+.admin-modal .stock-delete-btn .btn {
+    margin: 0;
+    width: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-modal .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    border-radius: 4px;
+}
+
+/* 재고 행 레이아웃 조정 */
+.admin-modal .stock-row {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.admin-modal .stock-row .col-sm-4,
+.admin-modal .stock-row .col-sm-6,
+.admin-modal .stock-row .col-sm-2 {
+    padding: 0 5px;
+}
+
+.admin-modal .error-message {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.admin-modal .image-preview-container {
+    margin-top: 10px;
+    border: 2px dashed #e0e0e0;
+    padding: 15px;
+    background-color: #fafafa;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    width: fit-content;
+    max-width: 300px;
+}
+
+.admin-modal .upload-image {
+    max-width: 250px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+
+.admin-modal .alert {
+    border-radius: 0;
+    border: none;
+    margin: 20px 30px;
+}
+
+/* 모달 버튼 그룹 스타일 */
+.admin-modal .modal-button-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
     margin-top: 20px;
 }
 
-.form-container{
-    padding:20px
-}
-.mr-1{
-    margin-right: 10px;
+.admin-modal .modal-button-group .btn {
+    min-width: 80px;
 }
 
-.upload-image{
-    max-width: 458px;
-    width:100%
-}
-.display-center{
-    display: flex;
-    justify-content: center;
-}
-.error-message{
-    color: red;
-    font-size: 10pt;
-    padding-right: 10px;
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .admin-product-container {
+        padding: 40px 20px;
+    }
+
+    .admin-page-title {
+        font-size: 1.5rem;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 15px 10px;
+        font-size: 0.8rem;
+    }
+
+    .admin-modal .modal-dialog {
+        max-width: 95%;
+        margin: 10px auto;
+        width: 95%;
+    }
+
+    .admin-modal .modal-body {
+        padding: 20px 15px;
+    }
+
+    .admin-modal .form-control,
+    .admin-modal .form-select {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+
+    .admin-modal .btn {
+        padding: 8px 16px;
+        font-size: 0.7rem;
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+
+    .admin-modal .modal-header {
+        padding: 15px 20px;
+    }
+
+    .admin-modal .modal-body {
+        padding: 20px;
+    }
 }
