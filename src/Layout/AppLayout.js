@@ -19,8 +19,12 @@ const AppLayout = ({ children }) => {
     location.pathname === "/" || location.pathname === "/products";
 
   useEffect(() => {
-    dispatch(loginWithToken());
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      dispatch(loginWithToken());
+    }
   }, [dispatch]);
+
   useEffect(() => {
     if (user) {
       dispatch(getCartQty());
