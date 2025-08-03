@@ -17,13 +17,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (loginError) {
-      dispatch(clearErrors());
-    }
-  }, [navigate]);
+    dispatch(clearErrors());
+  }, []);
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
     dispatch(loginWithEmail({ email, password }));
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleGoogleLogin = async (googleData) => {
@@ -49,7 +55,7 @@ const Login = () => {
               type="email"
               placeholder="이메일을 입력해주세요"
               required
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={handleEmailChange}
             />
           </Form.Group>
 
@@ -59,7 +65,7 @@ const Login = () => {
               type="password"
               placeholder="비밀번호를 입력해주세요"
               required
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={handlePasswordChange}
             />
           </Form.Group>
           <Button variant="dark" type="submit">
