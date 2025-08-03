@@ -361,6 +361,20 @@ body {
   .nav-right-menu .nav-icon:last-child {
     margin-right: 0;
   }
+
+  /* 관리자 페이지 반응형 */
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar-content {
+    display: none;
+  }
+
+  .admin-main-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 .display-flex {
@@ -596,6 +610,7 @@ body {
   padding: 40px 30px;
   height: 100%;
   color: #000000;
+  z-index: 100;
 }
 
 .admin-logo-link {

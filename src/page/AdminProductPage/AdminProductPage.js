@@ -25,6 +25,7 @@ const AdminProductPage = () => {
   }); //검색 조건들을 저장하는 객체
 
   const [mode, setMode] = useState("new");
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const tableHeader = [
     "#",
@@ -63,8 +64,57 @@ const AdminProductPage = () => {
     //  쿼리에 페이지값 바꿔주기
   };
 
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
+  const handleMenuClick = (path) => {
+    navigate(path);
+    setShowMobileMenu(false);
+  };
+
   return (
     <div className="admin-product-page">
+      {/* 모바일 햄버거 메뉴 */}
+      <div className="admin-mobile-header">
+        <div className="admin-mobile-menu-toggle" onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="admin-mobile-title">상품 관리</div>
+      </div>
+
+      {/* 모바일 메뉴 오버레이 */}
+      {showMobileMenu && (
+        <div
+          className="admin-mobile-menu-overlay"
+          onClick={() => setShowMobileMenu(false)}
+        >
+          <div
+            className="admin-mobile-menu-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="admin-mobile-logo">core</div>
+            <div className="admin-mobile-account-title">ADMIN ACCOUNT</div>
+            <div className="admin-mobile-menu-list">
+              <div
+                className="admin-mobile-menu-item active"
+                onClick={() => handleMenuClick("/admin/product")}
+              >
+                상품 관리
+              </div>
+              <div
+                className="admin-mobile-menu-item"
+                onClick={() => handleMenuClick("/admin/order")}
+              >
+                주문 관리
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="admin-product-container">
         <h1 className="admin-page-title">상품 관리</h1>
 
@@ -93,8 +143,8 @@ const AdminProductPage = () => {
         <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={100}
+          pageRangeDisplayed={2}
+          pageCount={10}
           forcePage={searchQuery.page - 1}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
