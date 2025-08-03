@@ -380,7 +380,6 @@ body {
 .link-area {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
   margin-right: 20px;
 }
 
@@ -553,4 +552,41 @@ body {
 
 .main-page .card:hover {
   background-color: rgba(255, 255, 255, 1);
+}
+
+/* 어드민 아이콘 스타일 */
+.admin-icon {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.admin-icon a {
+  color: inherit !important;
+  font-weight: inherit !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-icon a:hover {
+  color: inherit !important;
+}
+
+.admin-icon svg {
+  color: inherit;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.admin-icon:hover svg {
+  opacity: 1;
+}
+
+/* 메인페이지에서 어드민 아이콘 스타일 */
+.main-page .admin-icon {
+  color: #ffffff;
+}
+
+.main-page .admin-icon:hover {
+  color: #e0e0e0;
 }

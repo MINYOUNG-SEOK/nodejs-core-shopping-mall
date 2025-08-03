@@ -7,6 +7,7 @@ import {
   faSearch,
   faShoppingBag,
   faTimes,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -66,11 +67,6 @@ const Navbar = ({ user }) => {
           ))}
         </div>
       </div>
-      {user && user.level === "admin" && (
-        <Link to="/admin/product?page=1" className="link-area">
-          Admin page
-        </Link>
-      )}
       <div className="nav-header">
         <div className="nav-left">
           <div
@@ -111,6 +107,14 @@ const Navbar = ({ user }) => {
             <div className="nav-icon">
               <span style={{ cursor: "pointer" }}>SEARCH</span>
             </div>
+            {user && user.level === "admin" && (
+              <div className="nav-icon admin-icon">
+                <Link to="/admin/product?page=1">
+                  <FontAwesomeIcon icon={faCog} />
+                  <span style={{ cursor: "pointer" }}>ADMIN</span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
