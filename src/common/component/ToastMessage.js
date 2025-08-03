@@ -13,7 +13,17 @@ const ToastMessage = () => {
     if (toastMessage) {
       const { message, status } = toastMessage;
       if (message !== "" && status !== "") {
-        toast[status](message, { theme: "colored" });
+        // status 값을 toast 메서드로 매핑
+        const toastMethod =
+          status === "성공"
+            ? "success"
+            : status === "에러"
+            ? "error"
+            : status === "경고"
+            ? "warning"
+            : "info";
+
+        toast[toastMethod](message, { theme: "colored" });
 
         // 토스트 표시 후 상태 초기화
         dispatch(showToastMessage({ message: "", status: "" }));
