@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { ColorRing } from "react-loader-spinner";
 
 import "./style/register.style.css";
 
@@ -19,7 +20,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const [policyError, setPolicyError] = useState(false);
-  const { registrationError } = useSelector((state) => state.user);
+  const { registrationError, loading } = useSelector((state) => state.user);
 
   // 페이지 진입 시 에러 초기화
   useEffect(() => {
@@ -119,8 +120,30 @@ const RegisterPage = () => {
             checked={formData.policy}
           />
         </Form.Group>
-        <Button variant="dark" type="submit">
-          회원가입
+        <Button variant="dark" type="submit" disabled={loading}>
+          {loading ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+              }}
+            >
+              <ColorRing
+                visible={true}
+                height="20"
+                width="20"
+                ariaLabel="loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                colors={["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]}
+              />
+              회원가입 중...
+            </div>
+          ) : (
+            "회원가입"
+          )}
         </Button>
       </Form>
     </Container>

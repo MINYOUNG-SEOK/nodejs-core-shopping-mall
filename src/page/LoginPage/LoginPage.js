@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ColorRing } from "react-loader-spinner";
 // import { GoogleLogin } from "@react-oauth/google";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./style/login.style.css";
@@ -12,7 +13,7 @@ import { clearErrors } from "../../features/user/userSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginError } = useSelector((state) => state.user);
+  const { loginError, loading } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -65,8 +66,36 @@ const Login = () => {
               onChange={handlePasswordChange}
             />
           </Form.Group>
-          <Button variant="dark" type="submit">
-            로그인
+          <Button variant="dark" type="submit" disabled={loading}>
+            {loading ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                }}
+              >
+                <ColorRing
+                  visible={true}
+                  height="20"
+                  width="20"
+                  ariaLabel="loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  colors={[
+                    "#ffffff",
+                    "#ffffff",
+                    "#ffffff",
+                    "#ffffff",
+                    "#ffffff",
+                  ]}
+                />
+                로그인 중...
+              </div>
+            ) : (
+              "로그인"
+            )}
           </Button>
 
           <div className="register-link">
