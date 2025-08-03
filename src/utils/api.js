@@ -35,6 +35,11 @@ api.interceptors.response.use(
     return response;
   },
   function (error) {
+    // 인증 실패 시 토큰 제거
+    if (error.response && error.response.status === 401) {
+      sessionStorage.removeItem("token");
+    }
+
     error = error.response.data;
     return Promise.reject(error);
   }
