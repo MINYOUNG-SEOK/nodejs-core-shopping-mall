@@ -65,7 +65,7 @@ const RegisterPage = () => {
           <Form.Control
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="이메일을 입력해주세요"
             onChange={handleChange}
             required
           />
@@ -75,7 +75,7 @@ const RegisterPage = () => {
           <Form.Control
             type="text"
             id="name"
-            placeholder="Enter name"
+            placeholder="이름을 입력해주세요"
             onChange={handleChange}
             required
           />
@@ -85,7 +85,7 @@ const RegisterPage = () => {
           <Form.Control
             type="password"
             id="password"
-            placeholder="Password"
+            placeholder="비밀번호를 입력해주세요"
             onChange={handleChange}
             required
           />
@@ -95,7 +95,7 @@ const RegisterPage = () => {
           <Form.Control
             type="password"
             id="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder="비밀번호를 다시 입력해주세요"
             onChange={handleChange}
             required
             isInvalid={passwordError}
