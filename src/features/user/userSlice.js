@@ -10,7 +10,10 @@ export const loginWithEmail = createAsyncThunk(
     try {
       const response = await api.post("/auth/login", { email, password });
       // 성공
-      // Loginpage
+      // 토큰을 세션스토리지에 저장
+      if (response.data.token) {
+        sessionStorage.setItem("token", response.data.token);
+      }
       return response.data;
     } catch (error) {
       // 실패
@@ -26,8 +29,8 @@ export const loginWithGoogle = createAsyncThunk(
 );
 
 export const logout = () => (dispatch) => {
-  // 로컬 스토리지에서 토큰 제거
-  localStorage.removeItem("token");
+  // 세션스토리지에서 토큰 제거
+  sessionStorage.removeItem("token");
   // 사용자 상태 초기화
   dispatch(clearUser());
   // 성공 메시지 표시
