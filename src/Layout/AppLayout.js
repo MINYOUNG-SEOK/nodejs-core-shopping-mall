@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { ColorRing } from "react-loader-spinner";
 import Sidebar from "../common/component/Sidebar";
 import Navbar from "../common/component/Navbar";
 import ToastMessage from "../common/component/ToastMessage";
@@ -41,11 +42,21 @@ const AppLayout = ({ children }) => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          fontSize: "1.5em",
-          color: "#555",
+          flexDirection: "column",
         }}
       >
-        <p>인증 정보를 확인 중입니다...</p>
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={["#000000", "#333333", "#666666", "#999999", "#cccccc"]}
+        />
+        <p style={{ fontSize: "1em", color: "#555" }}>
+          인증 정보를 확인 중입니다...
+        </p>
       </div>
     );
   }
