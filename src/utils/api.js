@@ -1,12 +1,17 @@
 import axios from "axios";
 // 상황따라 주소 다름
-// const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
+const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
 const PROD_BACKEND = process.env.REACT_APP_PROD_BACKEND;
-// const BACKEND_PROXY = process.env.REACT_APP_BACKEND_PROXY;
-// console.log("proxy", BACKEND_PROXY);
+
+// 개발 환경이면 로컬, 프로덕션이면 배포 URL 사용
+const BACKEND_URL =
+  process.env.NODE_ENV === "development" ? LOCAL_BACKEND : PROD_BACKEND;
+
+console.log("현재 환경:", process.env.NODE_ENV);
+console.log("Backend URL:", BACKEND_URL);
 
 const api = axios.create({
-  baseURL: PROD_BACKEND,
+  baseURL: BACKEND_URL,
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -31,7 +36,6 @@ api.interceptors.response.use(
   },
   function (error) {
     error = error.response.data;
-    console.log("RESPONSE ERROR", error);
     return Promise.reject(error);
   }
 );

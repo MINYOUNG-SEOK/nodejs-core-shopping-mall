@@ -12,7 +12,7 @@ import { clearErrors } from "../../features/user/userSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, loginError } = useSelector((state) => state.user);
+  const { loginError } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,11 +36,6 @@ const Login = () => {
   // const handleGoogleLogin = async (googleData) => {
   // };
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
   return (
     <>
       <Container className="login-area">
