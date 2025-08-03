@@ -2,20 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { showToastMessage } from "../common/uiSlice";
 import api from "../../utils/api";
-// import { initialCart } from "../cart/cartSlice";
 
 export const loginWithEmail = createAsyncThunk(
   "user/loginWithEmail",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await api.post("/auth/login", { email, password });
-      // 성공
-      // 토큰을 세션스토리지에 저장
       sessionStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
-      // 실패
-      // 실패 시 생긴 에러 값을 reducer에 저장
       return rejectWithValue(error.error);
     }
   }
@@ -27,11 +22,8 @@ export const loginWithGoogle = createAsyncThunk(
 );
 
 export const logout = () => (dispatch) => {
-  // 세션스토리지에서 토큰 제거
   sessionStorage.removeItem("token");
-  // 사용자 상태 초기화
   dispatch(clearUser());
-  // 성공 메시지 표시
   dispatch(
     showToastMessage({
       message: "로그아웃되었습니다.",
@@ -39,6 +31,7 @@ export const logout = () => (dispatch) => {
     })
   );
 };
+
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (
@@ -47,27 +40,21 @@ export const registerUser = createAsyncThunk(
   ) => {
     try {
       const response = await api.post("/user", { email, name, password });
-      // 성공
-      // 1. 성공 토스트 메세지 보여주기
       dispatch(
         showToastMessage({
           message: "회원가입을 성공했습니다.",
           status: "success",
         })
       );
-      // 2. 로그인 페이지로 리다이렉트
       navigate("/login");
       return response.data.data;
     } catch (error) {
-      // 실패
-      // 1. 실패 토스트 메세지를 보여준다
       dispatch(
         showToastMessage({
           message: "회원가입을 실패했습니다.",
           status: "error",
         })
       );
-      // 2. 에러 값을 저장한다
       return rejectWithValue(error.error);
     }
   }
@@ -77,10 +64,17 @@ export const loginWithToken = createAsyncThunk(
   "user/loginWithToken",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/user/me");
+      const token = sessionStorage.getItem("token"); // 추가: 토큰이 없으면 API 호출하지 않음
+      if (!token) {
+        return rejectWithValue("No token found");
+      }
+      const response = await api.get("/user/me", {
+        headers: {
+          Authorization: `Bearer ${token}`, // 추가: 토큰을 헤더에 포함하여 전송
+        },
+      });
       return response.data;
     } catch (error) {
-      // 토큰이 유효하지 않으면 세션스토리지에서 제거
       sessionStorage.removeItem("token");
       return rejectWithValue(error.error || "Token validation failed");
     }
@@ -92,6 +86,7 @@ const userSlice = createSlice({
   initialState: {
     user: null,
     loading: false,
+    isAuthenticating: true,
     loginError: null,
     registrationError: null,
     success: false,
@@ -106,10 +101,16 @@ const userSlice = createSlice({
       state.loginError = null;
       state.registrationError = null;
       state.success = false;
+      state.isAuthenticating = false;
+    },
+    // loginWithToken 실패 시 isAuthenticating을 false로 설정하는 액션 추가
+    stopAuthenticating: (state) => {
+      state.isAuthenticating = false;
     },
   },
   extraReducers: (builder) => {
     builder
+      // registerUser 핸들러
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
       })
@@ -118,8 +119,11 @@ const userSlice = createSlice({
         state.registrationError = null;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
         state.registrationError = action.payload;
       })
+
+      // loginWithEmail 핸들러
       .addCase(loginWithEmail.pending, (state) => {
         state.loading = true;
       })
@@ -127,22 +131,32 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.loginError = null;
+        state.isAuthenticating = false;
       })
       .addCase(loginWithEmail.rejected, (state, action) => {
         state.loading = false;
         state.loginError = action.payload;
+        state.isAuthenticating = false;
+      })
+
+      // loginWithToken 핸들러 수정
+      .addCase(loginWithToken.pending, (state) => {
+        state.isAuthenticating = true;
+        state.loading = true;
       })
       .addCase(loginWithToken.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
         state.loginError = null;
+        state.isAuthenticating = false;
       })
       .addCase(loginWithToken.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
         state.loginError = null;
+        state.isAuthenticating = false;
       });
   },
 });
-export const { clearErrors, clearUser } = userSlice.actions;
+export const { clearErrors, clearUser, stopAuthenticating } = userSlice.actions;
 export default userSlice.reducer;

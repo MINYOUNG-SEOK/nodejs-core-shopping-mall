@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../common/component/Sidebar";
 import Navbar from "../common/component/Navbar";
 import ToastMessage from "../common/component/ToastMessage";
-import { loginWithToken } from "../features/user/userSlice";
+import { loginWithToken, stopAuthenticating } from "../features/user/userSlice";
 import { getCartQty } from "../features/cart/cartSlice";
 
 const AppLayout = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticating } = useSelector((state) => state.user);
 
   // 메인페이지인지 확인
   const isMainPage =
@@ -22,14 +22,33 @@ const AppLayout = ({ children }) => {
     const token = sessionStorage.getItem("token");
     if (token) {
       dispatch(loginWithToken());
+    } else {
+      dispatch(stopAuthenticating());
     }
   }, [dispatch]);
 
   useEffect(() => {
-    if (user) {
+    if (user && !isAuthenticating) {
       dispatch(getCartQty());
     }
-  }, [user, dispatch]);
+  }, [user, isAuthenticating, dispatch]);
+
+  if (isAuthenticating) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          fontSize: "1.5em",
+          color: "#555",
+        }}
+      >
+        <p>인증 정보를 확인 중입니다...</p>
+      </div>
+    );
+  }
 
   return (
     <div className={isMainPage ? "main-page" : ""}>
