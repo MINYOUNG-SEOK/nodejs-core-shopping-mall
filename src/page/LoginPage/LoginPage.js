@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleLogin } from "@react-oauth/google";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./style/login.style.css";
-import { loginWithEmail, loginWithGoogle } from "../../features/user/userSlice";
+import { loginWithEmail } from "../../features/user/userSlice";
 import { clearErrors } from "../../features/user/userSlice";
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+// const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -32,9 +32,9 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleGoogleLogin = async (googleData) => {
-    //구글 로그인 하기
-  };
+  // 구글 로그인 하기
+  // const handleGoogleLogin = async (googleData) => {
+  // };
 
   useEffect(() => {
     if (user) {
@@ -81,14 +81,14 @@ const Login = () => {
           <div className="google-login-section">
             <p>-외부 계정으로 로그인하기-</p>
             <div className="display-center">
-              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              {/* <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
                 <GoogleLogin
                   onSuccess={handleGoogleLogin}
                   onError={() => {
                     console.log("Login Failed");
                   }}
                 />
-              </GoogleOAuthProvider>
+              </GoogleOAuthProvider> */}
             </div>
           </div>
         </Form>
