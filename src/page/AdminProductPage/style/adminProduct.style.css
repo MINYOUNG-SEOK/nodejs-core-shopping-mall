@@ -44,9 +44,9 @@
 }
 
 .admin-add-button {
-    background-color: #000000;
-    border: 1px solid #000000;
-    border-radius: 0;
+    background-color: #000000 !important;
+    border: 1px solid #000000 !important;
+    border-radius: 4px;
     padding: 12px 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -55,13 +55,12 @@
     transition: all 0.2s ease;
     color: #ffffff;
     margin-bottom: 30px;
-    border-radius: 4px;
 }
 
 .admin-add-button:hover {
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #000000;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
 }
 
 .admin-table-container {
@@ -161,7 +160,6 @@
     border-color: #000000;
 }
 
-/* No Data 메시지 스타일 */
 .admin-no-data {
     text-align: center;
     padding: 60px 20px;
@@ -175,14 +173,10 @@
     margin-bottom: 40px;
 }
 
-/* 모달 스타일 - core de 컨셉 */
 .admin-modal {
-    margin: 20px;
-    padding: 0 10px;
     z-index: 9999 !important;
 }
 
-/* Bootstrap 모달 z-index 강제 설정 */
 .modal-backdrop {
     z-index: 9998 !important;
 }
@@ -193,7 +187,7 @@
 
 .admin-modal .modal-dialog {
     max-width: 700px;
-    margin: 10px auto;
+    margin: 30px auto;
     width: 90%;
     z-index: 10000 !important;
 }
@@ -244,6 +238,7 @@
 .admin-modal .modal-header .btn-close:hover {
     opacity: 0.7 !important;
     color: #666666 !important;
+    border: none !important;
 }
 
 .admin-modal .modal-header .btn-close::before,
@@ -257,6 +252,7 @@
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
+    border: none !important;
 }
 
 .admin-modal .modal-header .btn-close::before {
@@ -296,7 +292,6 @@
 .admin-modal .form-control,
 .admin-modal .form-select {
     border: 1px solid #e0e0e0;
-    border-radius: 0;
     padding: 10px 12px;
     font-size: 1rem;
     background-color: #ffffff;
@@ -313,7 +308,7 @@
 }
 
 .admin-modal .btn {
-    border-radius: 0;
+    border-radius: 4px;
     font-weight: 400;
     text-transform: uppercase;
     font-size: 1rem;
@@ -322,7 +317,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-radius: 4px;
 }
 
 .admin-modal .btn-primary {
@@ -348,7 +342,6 @@
     color: #ffffff;
 }
 
-/* 재고 삭제 버튼 중앙 정렬 */
 .admin-modal .stock-delete-btn {
     display: flex;
     align-items: center;
@@ -359,9 +352,8 @@
 }
 
 .admin-modal .stock-delete-btn .btn {
-    margin: 0;
     width: 40px;
-    height: 38px;
+    padding: 10px 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -373,7 +365,6 @@
     border-radius: 4px;
 }
 
-/* 재고 행 레이아웃 조정 */
 .admin-modal .stock-row {
     align-items: center;
     margin-bottom: 10px;
@@ -422,7 +413,6 @@
     font-size: 1rem;
 }
 
-/* 모달 버튼 그룹 스타일 */
 .admin-modal .modal-button-group {
     display: flex;
     justify-content: flex-start;
@@ -435,20 +425,15 @@
     min-width: 80px;
 }
 
-/* 데스크톱에서 모바일 메뉴 숨기기 */
 .admin-mobile-header {
     display: none;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 768px) {
-
-    /* 사이드바 숨기기 */
     .admin-sidebar-content {
         display: none;
     }
 
-    /* 메인 컨테이너 전체 너비 사용 */
     .admin-product-container {
         padding: 20px;
         margin-left: 0;
@@ -456,15 +441,15 @@
         max-width: 100vw;
         overflow-x: hidden;
         box-sizing: border-box;
+        padding-top: 80px;
     }
 
-    /* 페이지 제목 크기 조정 */
     .admin-page-title {
         font-size: 1.3rem;
         margin-bottom: 30px;
+        display: none;
     }
 
-    /* 검색 영역 최적화 */
     .admin-search-section {
         margin-bottom: 25px;
         width: 100%;
@@ -479,7 +464,6 @@
         box-sizing: border-box;
     }
 
-    /* 버튼 크기 조정 */
     .admin-add-button {
         padding: 12px 20px;
         font-size: 0.9rem;
@@ -489,7 +473,6 @@
         box-sizing: border-box;
     }
 
-    /* 테이블 반응형 처리 */
     .admin-table-container {
         overflow-x: auto;
         margin-bottom: 30px;
@@ -506,7 +489,6 @@
         white-space: nowrap;
     }
 
-    /* 액션 버튼 크기 조정 */
     .admin-action-button {
         padding: 6px 10px;
         font-size: 0.6rem;
@@ -518,7 +500,6 @@
         font-size: 0.6rem;
     }
 
-    /* 페이지네이션 최적화 */
     .admin-pagination {
         margin-top: 30px;
         width: 100%;
@@ -532,22 +513,12 @@
         margin: 0 1px;
     }
 
-    /* 모달 반응형 처리 */
     .admin-modal .modal-dialog {
-        max-width: 95% !important;
-        margin: 5px 10px !important;
-        width: calc(100% - 20px) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-
-    .admin-modal {
-        padding: 0 10px;
+        max-width: 90% !important;
     }
 
     .admin-modal .modal-content {
         max-height: 90vh;
-        margin: 0 10px;
     }
 
     .admin-modal .modal-header {
@@ -590,7 +561,6 @@
         width: auto;
     }
 
-    /* 이미지 프리뷰 최적화 */
     .admin-modal .image-preview-container {
         max-width: 100%;
         min-height: 100px;
@@ -602,7 +572,6 @@
         max-height: 150px;
     }
 
-    /* 재고 행 레이아웃 조정 */
     .admin-modal .stock-row .col-sm-4,
     .admin-modal .stock-row .col-sm-6,
     .admin-modal .stock-row .col-sm-2 {
@@ -614,7 +583,6 @@
         height: 35px;
     }
 
-    /* 모바일 햄버거 메뉴 스타일 */
     .admin-mobile-header {
         display: flex;
         align-items: center;
@@ -734,16 +702,5 @@
     .admin-mobile-menu-item:hover {
         border-bottom: 1px solid #000000;
         color: #000000;
-    }
-
-
-    /* 모바일에서 기존 제목 숨기기 */
-    .admin-page-title {
-        display: none;
-    }
-
-    /* 모바일 컨테이너 상단 여백 추가 */
-    .admin-product-container {
-        padding-top: 80px;
     }
 }

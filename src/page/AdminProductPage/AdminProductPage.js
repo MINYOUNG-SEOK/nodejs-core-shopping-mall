@@ -140,7 +140,7 @@ const AdminProductPage = () => {
           />
         </div>
 
-        <ReactPaginate
+        {/* <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}
           pageRangeDisplayed={2}
@@ -160,7 +160,7 @@ const AdminProductPage = () => {
           containerClassName="admin-pagination"
           activeClassName="active"
           className="display-center list-style-none"
-        />
+        /> */}
       </div>
 
       <NewItemDialog

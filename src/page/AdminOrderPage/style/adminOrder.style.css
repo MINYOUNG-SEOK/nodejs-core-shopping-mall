@@ -186,34 +186,30 @@
     margin-bottom: 40px;
 }
 
-/* 데스크톱에서 모바일 메뉴 숨기기 */
 .admin-mobile-header {
     display: none;
 }
 
 @media (max-width: 768px) {
-
-    /* 사이드바 숨기기 */
     .admin-sidebar-content {
         display: none;
     }
 
-    /* 메인 컨테이너 전체 너비 사용 */
     .admin-order-container {
         padding: 20px;
         margin-left: 0;
         width: 100%;
         max-width: 100vw;
         overflow-x: hidden;
+        padding-top: 80px;
     }
 
-    /* 페이지 제목 크기 조정 */
     .admin-order-title {
         font-size: 1.3rem;
         margin-bottom: 30px;
+        display: none;
     }
 
-    /* 검색 영역 최적화 */
     .admin-order-search-section {
         margin-bottom: 25px;
         width: 100%;
@@ -228,7 +224,6 @@
         box-sizing: border-box;
     }
 
-    /* 테이블 반응형 처리 */
     .admin-order-table-container {
         overflow-x: auto;
         margin-bottom: 30px;
@@ -245,14 +240,12 @@
         white-space: nowrap;
     }
 
-    /* 액션 버튼 크기 조정 */
     .admin-order-action-button {
         padding: 6px 10px;
         font-size: 0.6rem;
         margin: 0 2px;
     }
 
-    /* 페이지네이션 최적화 */
     .admin-order-pagination {
         margin-top: 30px;
         width: 100%;
@@ -266,7 +259,6 @@
         margin: 0 1px;
     }
 
-    /* 주문 상태 배지 크기 조정 */
     .order-status-pending,
     .order-status-shipped,
     .order-status-delivered,
@@ -275,7 +267,6 @@
         font-size: 0.6rem;
     }
 
-    /* 모바일 햄버거 메뉴 스타일 */
     .admin-mobile-header {
         display: flex;
         align-items: center;
@@ -397,25 +388,8 @@
         color: #000000;
     }
 
-
-
-    /* 모바일에서 기존 제목 숨기기 */
-    .admin-order-title {
-        display: none;
-    }
-
-    /* 모바일 컨테이너 상단 여백 추가 */
-    .admin-order-container {
-        padding-top: 80px;
-    }
-
-    /* 모달 반응형 처리 */
     .admin-modal .modal-dialog {
-        max-width: 95% !important;
-        margin: 5px 10px !important;
-        width: calc(100% - 20px) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        max-width: 90% !important;
     }
 
     .admin-modal .modal-content {
