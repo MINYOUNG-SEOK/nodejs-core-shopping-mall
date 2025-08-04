@@ -39,14 +39,24 @@ const AdminProductPage = () => {
     "",
   ];
 
-  //상품리스트 가져오기 (url쿼리 맞춰서)
   useEffect(() => {
-    dispatch(getProductList());
-  }, []);
+    const urlName = query.get("name");
+    if (urlName) {
+      setSearchQuery((prev) => ({ ...prev, name: urlName }));
+    }
+    dispatch(getProductList({ name: urlName }));
+  }, [dispatch, query]);
 
   useEffect(() => {
-    //검색어나 페이지가 바뀌면 url바꿔주기 (검색어또는 페이지가 바뀜 => url 바꿔줌=> url쿼리 읽어옴=> 이 쿼리값 맞춰서  상품리스트 가져오기)
-  }, [searchQuery]);
+    const params = new URLSearchParams();
+    if (searchQuery.page > 1) params.append("page", searchQuery.page);
+    if (searchQuery.name) params.append("name", searchQuery.name);
+
+    const newUrl = params.toString() ? `?${params.toString()}` : "";
+    navigate(newUrl, { replace: true });
+
+    dispatch(getProductList({ name: searchQuery.name }));
+  }, [searchQuery, dispatch, navigate]);
 
   const deleteItem = (id) => {
     //아이템 삭제하가ㅣ

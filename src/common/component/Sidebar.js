@@ -41,7 +41,9 @@ const Sidebar = () => {
 
       <Navbar bg="light" expand={false} className="mobile-sidebar-toggle">
         <Container fluid>
-          <span className="brand-logo">core</span>
+          <Link to="/" className="admin-logo-link">
+            <span className="brand-logo">core</span>
+          </Link>
           <Navbar.Brand href="#"></Navbar.Brand>
           <Navbar.Toggle
             aria-controls={`offcanvasNavbar-expand`}
