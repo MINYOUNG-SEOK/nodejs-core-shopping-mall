@@ -37,6 +37,8 @@ export const createProduct = createAsyncThunk(
       const response = await api.post("/product", formData);
       if (response.status !== 200) throw new Error(response.error);
       dispatch(showToastMessage({ message: "상품 생성 완료", status: "성공" }));
+      // 상품 생성 성공 후 상품 리스트 다시 불러오기
+      dispatch(getProductList());
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.error);
