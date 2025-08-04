@@ -83,6 +83,11 @@ body {
   color: #666666;
 }
 
+.sidebar-menu li.active a {
+  font-weight: 700;
+  color: #000000;
+}
+
 .nav-sidebar {
   position: fixed;
   left: 0;
@@ -196,6 +201,171 @@ body {
 .card:hover {
   transform: scale(1.1);
   z-index: 1;
+}
+
+/* 상품 카드 스타일 */
+.product-card {
+  border: none;
+  margin-bottom: 30px;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.product-image-container {
+  width: 100%;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-name {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #333;
+}
+
+.product-price-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.current-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.discount-rate {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: red;
+}
+
+.original-price {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #999999;
+  text-decoration: line-through;
+  line-height: 1.1;
+
+}
+
+/* 반응형 상품 카드 스타일 */
+@media screen and (max-width: 768px) {
+  .product-card {
+    margin-bottom: 20px;
+  }
+
+  .product-name {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  .current-price {
+    font-size: 0.9rem;
+  }
+
+  .discount-rate {
+    font-size: 0.7rem;
+    padding: 1px 4px;
+  }
+
+  .original-price {
+    font-size: 0.7rem;
+  }
+
+  .product-price-container {
+    gap: 2px;
+  }
+
+  .price-row {
+    gap: 6px;
+  }
+}
+
+/* ProductsPage 스타일 */
+.products-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.products-page-header {
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+.category-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.no-products-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666666;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.no-products-message h3 {
+  margin: 0;
+  font-weight: 400;
+}
+
+/* LandingPage 스타일 */
+.landing-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  text-align: center;
+}
+
+.welcome-section {
+  max-width: 600px;
+  padding: 40px 20px;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.welcome-description {
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.welcome-description p {
+  margin-bottom: 15px;
 }
 
 .hide {
@@ -489,6 +659,12 @@ body {
   transition: background-color 0.2s ease;
 }
 
+.mobile-menu-list li.active a {
+  font-weight: 700;
+  color: #000000;
+  background-color: #f0f0f0;
+}
+
 /* 메인페이지 전용 스타일 */
 .main-page {
   background-image: url('https://image.hm.com/assets/hm/50/e8/50e829db2ba411231dafd57719bba12bb528dc1c.jpg?imwidth=1800');
@@ -545,6 +721,11 @@ body {
   color: #e0e0e0 !important;
 }
 
+.main-page .sidebar-menu li.active a {
+  font-weight: 700 !important;
+  color: #ffffff !important;
+}
+
 .main-page .main-content {
   color: #ffffff;
   position: relative;
@@ -565,6 +746,13 @@ body {
 
 .main-page .card:hover {
   background-color: rgba(255, 255, 255, 1);
+}
+
+/* 메인페이지에서 상품 카드 스타일 */
+.main-page .product-card {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
 /* 어드민 아이콘 스타일 */

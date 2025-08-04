@@ -5,7 +5,24 @@ import { showToastMessage } from "../common/uiSlice";
 // 비동기 액션 생성
 export const getProductList = createAsyncThunk(
   "products/getProductList",
-  async (query, { rejectWithValue }) => {}
+  async (query = {}, { rejectWithValue }) => {
+    try {
+      // 쿼리 파라미터를 URL에 추가
+      const params = new URLSearchParams();
+      if (query.category) params.append("category", query.category);
+      if (query.name) params.append("name", query.name);
+
+      const url = params.toString()
+        ? `/product?${params.toString()}`
+        : "/product";
+      const response = await api.get(url);
+
+      if (response.status !== 200) throw new Error(response.error);
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.error);
+    }
+  }
 );
 
 export const getProductDetail = createAsyncThunk(
@@ -69,11 +86,24 @@ const productSlice = createSlice({
       state.error = "";
       state.success = true; // 상품 생성 성공하면 다이얼로그 닫고, 실패하면 다이어로그 보여주고 닫지않음
     });
-    builder.addCase(createProduct.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-      state.success = false;
-    });
+    builder
+      .addCase(createProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+      })
+      .addCase(getProductList.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getProductList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productList = action.payload;
+        state.error = "";
+      })
+      .addCase(getProductList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 

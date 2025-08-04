@@ -15,9 +15,8 @@ const AppLayout = ({ children }) => {
 
   const { user, isAuthenticating } = useSelector((state) => state.user);
 
-  // 메인페이지인지 확인
-  const isMainPage =
-    location.pathname === "/" || location.pathname === "/products";
+  // 메인페이지인지 확인 (루트 경로만)
+  const isMainPage = location.pathname === "/";
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");

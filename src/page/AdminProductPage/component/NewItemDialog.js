@@ -19,6 +19,8 @@ const InitialFormData = {
   category: [],
   status: "active",
   price: 0,
+  originalPrice: 0,
+  isOnSale: false,
 };
 
 const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
@@ -114,22 +116,11 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   };
 
   const onHandleCategory = (event) => {
-    // 카테고리가 이미 추가되어 있으면 제거
-    if (formData.category.includes(event.target.value)) {
-      const newCategory = formData.category.filter(
-        (item) => item !== event.target.value
-      );
-      setFormData({
-        ...formData,
-        category: [...newCategory],
-      });
-    } else {
-      // 아니면 새로 추가
-      setFormData({
-        ...formData,
-        category: [...formData.category, event.target.value],
-      });
-    }
+    // 단일 카테고리 선택
+    setFormData({
+      ...formData,
+      category: [event.target.value],
+    });
   };
 
   const uploadImage = (url) => {
@@ -281,8 +272,19 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
         </Form.Group>
 
         <Row className="mb-3">
+          <Form.Group as={Col} controlId="originalPrice">
+            <Form.Label>Original Price</Form.Label>
+            <Form.Control
+              value={formData.originalPrice}
+              required
+              onChange={handleChange}
+              type="number"
+              placeholder="0"
+            />
+          </Form.Group>
+
           <Form.Group as={Col} controlId="price">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Sale Price</Form.Label>
             <Form.Control
               value={formData.price}
               required
@@ -292,21 +294,40 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
             />
           </Form.Group>
 
+          <Form.Group as={Col} controlId="isOnSale">
+            <Form.Label>On Sale</Form.Label>
+            <Form.Select
+              value={formData.isOnSale ? "true" : "false"}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  isOnSale: e.target.value === "true",
+                })
+              }
+            >
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </Form.Select>
+          </Form.Group>
+        </Row>
+
+        <Row className="mb-3">
           <Form.Group as={Col} controlId="category">
             <Form.Label>Category</Form.Label>
-            <Form.Control
-              as="select"
-              multiple
+            <Form.Select
               onChange={onHandleCategory}
-              value={formData.category}
+              value={formData.category[0] || ""}
               required
             >
+              <option value="" disabled>
+                Please Choose...
+              </option>
               {CATEGORY.map((item, idx) => (
                 <option key={idx} value={item.toLowerCase()}>
                   {item}
                 </option>
               ))}
-            </Form.Control>
+            </Form.Select>
           </Form.Group>
 
           <Form.Group as={Col} controlId="status">

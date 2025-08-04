@@ -65,7 +65,6 @@
 
 .admin-table-container {
     background-color: #ffffff;
-    border: 1px solid #e0e0e0;
     margin-bottom: 40px;
 }
 
@@ -82,12 +81,13 @@
     letter-spacing: 1px;
     border: none;
     border-bottom: 1px solid #e0e0e0;
-    padding: 20px 15px;
+    padding: 20px 10px;
     font-size: 0.8rem;
+    white-space: nowrap;
 }
 
 .admin-table td {
-    padding: 20px 15px;
+    padding: 20px 10px;
     border-bottom: 1px solid #f0f0f0;
     vertical-align: middle;
     font-size: 0.9rem;
@@ -484,8 +484,8 @@
 
     .admin-table th,
     .admin-table td {
-        padding: 12px 8px;
-        font-size: 0.8rem;
+        padding: 10px 6px;
+        font-size: 0.7rem;
         white-space: nowrap;
     }
 

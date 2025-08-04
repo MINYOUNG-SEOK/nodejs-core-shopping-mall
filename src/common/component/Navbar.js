@@ -9,13 +9,14 @@ import {
   faTimes,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user/userSlice";
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { cartItemCount } = useSelector((state) => state.cart);
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
@@ -30,6 +31,32 @@ const Navbar = ({ user }) => {
       }
       navigate(`?name=${event.target.value}`);
     }
+  };
+
+  // 현재 활성화된 메뉴 확인
+  const isActiveMenu = (menu) => {
+    // 현재 경로가 /products인지 확인
+    if (location.pathname !== "/products") {
+      return false;
+    }
+
+    const currentCategory = new URLSearchParams(location.search).get(
+      "category"
+    );
+
+    // 디버깅용 로그
+    console.log("Current pathname:", location.pathname);
+    console.log("Current category:", currentCategory);
+    console.log("Checking menu:", menu);
+    console.log("Is active:", currentCategory === menu);
+
+    // All 메뉴의 경우: category가 없거나 All인 경우
+    if (menu === "All" && (!currentCategory || currentCategory === "All")) {
+      return true;
+    }
+
+    // 다른 메뉴의 경우: category가 일치하는 경우
+    return currentCategory === menu;
   };
   const handleLogout = () => {
     dispatch(logout());
@@ -122,7 +149,7 @@ const Navbar = ({ user }) => {
       <div className="nav-sidebar">
         <ul className="sidebar-menu">
           {menuList.map((menu, index) => (
-            <li key={index}>
+            <li key={index} className={isActiveMenu(menu) ? "active" : ""}>
               <Link to={`/products?category=${menu}`}>{menu}</Link>
             </li>
           ))}
@@ -150,7 +177,7 @@ const Navbar = ({ user }) => {
             </div>
             <ul className="mobile-menu-list">
               {menuList.map((menu, index) => (
-                <li key={index}>
+                <li key={index} className={isActiveMenu(menu) ? "active" : ""}>
                   <Link
                     to={`/products?category=${menu}`}
                     onClick={() => setShowMobileMenu(false)}
