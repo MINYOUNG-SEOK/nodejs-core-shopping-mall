@@ -8,6 +8,7 @@ import { getProductList } from "../../features/product/productSlice";
 const ProductsPage = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.productList);
+  const loading = useSelector((state) => state.product.loading);
   const [query] = useSearchParams();
   const category = query.get("category");
   const name = query.get("name");
@@ -34,7 +35,19 @@ const ProductsPage = () => {
           </h2>
         </div>
         <Row>
-          {productList.length > 0 ? (
+          {loading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <Col lg={4} md={6} sm={12} key={`skeleton-${index}`}>
+                <div className="product-skeleton">
+                  <div className="skeleton-image"></div>
+                  <div className="skeleton-content">
+                    <div className="skeleton-title"></div>
+                    <div className="skeleton-price"></div>
+                  </div>
+                </div>
+              </Col>
+            ))
+          ) : productList.length > 0 ? (
             productList.map((item) => (
               <Col lg={4} md={6} sm={12} key={item._id}>
                 <ProductCard item={item} />
