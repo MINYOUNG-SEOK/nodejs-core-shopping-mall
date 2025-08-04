@@ -26,7 +26,11 @@ const ProductsPage = () => {
       <Container>
         <div className="products-page-header">
           <h2 className="category-title">
-            {category === "All" ? "SHOP > All" : `SHOP > ${category}`}
+            {name
+              ? `검색 결과 ${productList.length}건`
+              : category === "All"
+              ? "SHOP > All"
+              : `SHOP > ${category}`}
           </h2>
         </div>
         <Row>
@@ -39,7 +43,9 @@ const ProductsPage = () => {
           ) : (
             <div className="no-products-message">
               <h3>
-                {category === "All"
+                {name
+                  ? `"${name}"에 대한 검색 결과가 없습니다.`
+                  : category === "All"
                   ? "등록된 상품이 없습니다!"
                   : `${category} 카테고리의 상품이 없습니다!`}
               </h3>

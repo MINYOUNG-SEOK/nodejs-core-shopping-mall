@@ -30,12 +30,12 @@
 
 .admin-search-section .search-box {
     border: 1px solid #e0e0e0;
-    border-radius: 0;
     padding: 10px 12px;
     font-size: 0.9rem;
     background-color: #ffffff;
     width: 100%;
     max-width: 400px;
+    border-radius: 4px;
 }
 
 .admin-search-section .search-box:focus {

@@ -26,10 +26,12 @@ const Navbar = ({ user }) => {
   let navigate = useNavigate();
   const onCheckEnter = (event) => {
     if (event.key === "Enter") {
-      if (event.target.value === "") {
+      if (event.target.value.trim() === "") {
+        setShowSearchBox(false);
         return navigate("/");
       }
-      navigate(`?name=${event.target.value}`);
+      setShowSearchBox(false);
+      navigate(`/products?name=${event.target.value.trim()}`);
     }
   };
 
@@ -64,22 +66,33 @@ const Navbar = ({ user }) => {
   return (
     <div>
       {showSearchBox && (
-        <div className="display-space-between mobile-search-box w-100">
-          <div className="search display-space-between w-100">
-            <div>
-              <FontAwesomeIcon className="search-icon" icon={faSearch} />
-              <input
-                type="text"
-                placeholder="제품검색"
-                onKeyPress={onCheckEnter}
-              />
+        <div className="search-overlay" onClick={() => setShowSearchBox(false)}>
+          <div className="search-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="search-modal-content">
+              <div className="search-input-container">
+                <input
+                  type="text"
+                  placeholder="검색어를 입력하세요"
+                  onKeyPress={onCheckEnter}
+                  onFocus={(e) => e.target.setSelectionRange(0, 0)}
+                  autoFocus
+                />
+                <button
+                  className="search-enter-btn"
+                  onClick={() => {
+                    const input = document.querySelector(
+                      ".search-input-container input"
+                    );
+                    if (input && input.value.trim()) {
+                      setShowSearchBox(false);
+                      navigate(`/products?name=${input.value.trim()}`);
+                    }
+                  }}
+                >
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
             </div>
-            <button
-              className="closebtn"
-              onClick={() => setShowSearchBox(false)}
-            >
-              &times;
-            </button>
           </div>
         </div>
       )}
@@ -132,7 +145,12 @@ const Navbar = ({ user }) => {
               }`}</span>
             </div>
             <div className="nav-icon">
-              <span style={{ cursor: "pointer" }}>SEARCH</span>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowSearchBox(true)}
+              >
+                SEARCH
+              </span>
             </div>
             {user && user.level === "admin" && (
               <div className="nav-icon admin-icon">
