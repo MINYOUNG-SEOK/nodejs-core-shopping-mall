@@ -47,6 +47,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
         setFormData(selectedProduct);
         // 객체형태로 온 stock을  다시 배열로 세팅해주기
         const sizeArray = Object.keys(selectedProduct.stock).map((size) => [
+          Date.now() + Math.random(), // 고유 ID 생성
           size,
           selectedProduct.stock[size],
         ]);
@@ -72,9 +73,13 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (stock.length === 0) return setStockError(true);
     setStockError(false);
     // 재고를 배열에서 객체로 바꿔주기
-    // [['M',2]] 에서 {M:2}로
+    // [[id, 'M', 2]] 에서 {M:2}로
     const totalStock = stock.reduce((total, item) => {
-      return { ...total, [item[0]]: parseInt(item[1]) };
+      if (item[1] && item[2]) {
+        // size와 quantity가 모두 있는 경우만
+        return { ...total, [item[1]]: parseInt(item[2]) };
+      }
+      return total;
     }, {});
     if (mode === "new") {
       //새 상품 만들기
@@ -91,12 +96,13 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   };
 
   const addStock = () => {
-    //재고타입 추가시 배열에 새 배열 추가
-    setStock([...stock, ["", ""]]);
+    //재고타입 추가시 배열에 새 배열 추가 (고유 ID 포함)
+    const newId = Date.now() + Math.random(); // 고유 ID 생성
+    setStock([...stock, [newId, "", ""]]);
   };
 
   const deleteStock = (idx) => {
-    //재고 삭제하기
+    //재고 삭제하기 (인덱스 기반)
     const newStock = stock.filter((item, index) => index !== idx);
     setStock(newStock);
   };
@@ -104,14 +110,14 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const handleSizeChange = (value, index) => {
     //  재고 사이즈 변환하기
     const newStock = [...stock];
-    newStock[index][0] = value;
+    newStock[index][1] = value; // ID, size, quantity 구조
     setStock(newStock);
   };
 
   const handleStockChange = (value, index) => {
     //재고 수량 변환하기
     const newStock = [...stock];
-    newStock[index][1] = value;
+    newStock[index][2] = value; // ID, size, quantity 구조
     setStock(newStock);
   };
 
@@ -193,27 +199,27 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
           </Button>
           <div className="mt-2">
             {stock.map((item, index) => (
-              <Row key={index} className="stock-row">
+              <Row key={item[0]} className="stock-row">
                 <Col sm={4}>
                   <Form.Select
                     onChange={(event) =>
                       handleSizeChange(event.target.value, index)
                     }
                     required
-                    defaultValue={item[0] ? item[0].toLowerCase() : ""}
+                    defaultValue={item[1] ? item[1].toLowerCase() : ""}
                   >
                     <option value="" disabled hidden>
                       Please Choose...
                     </option>
-                    {SIZE.map((item, index) => (
+                    {SIZE.map((sizeItem, sizeIndex) => (
                       <option
-                        value={item.toLowerCase()}
+                        value={sizeItem.toLowerCase()}
                         disabled={stock.some(
-                          (size) => size[0] === item.toLowerCase()
+                          (stockItem) => stockItem[1] === sizeItem.toLowerCase()
                         )}
-                        key={index}
+                        key={sizeIndex}
                       >
-                        {item}
+                        {sizeItem}
                       </option>
                     ))}
                   </Form.Select>
@@ -225,7 +231,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
                     }
                     type="number"
                     placeholder="number of stock"
-                    value={item[1] || ""}
+                    value={item[2] || ""}
                     required
                   />
                 </Col>

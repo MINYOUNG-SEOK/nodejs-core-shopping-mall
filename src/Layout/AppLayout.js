@@ -53,9 +53,9 @@ const AppLayout = ({ children }) => {
           wrapperClass="blocks-wrapper"
           colors={["#000000", "#333333", "#666666", "#999999", "#cccccc"]}
         />
-        <p style={{ fontSize: "1em", color: "#555" }}>
+        {/* <p style={{ fontSize: "1em", color: "#555" }}>
           인증 정보를 확인 중입니다...
-        </p>
+        </p> */}
       </div>
     );
   }

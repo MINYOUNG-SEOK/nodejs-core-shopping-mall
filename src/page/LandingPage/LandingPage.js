@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <Container>
       <div className="landing-page-content">
-        <div className="welcome-section">
+        {/* <div className="welcome-section">
           <h1 className="welcome-title">Welcome to core</h1>
           <p className="welcome-subtitle">
             Discover our latest collection of fashion essentials
@@ -20,7 +20,7 @@ const LandingPage = () => {
               match your taste.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </Container>
   );
