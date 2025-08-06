@@ -18,8 +18,8 @@ const InitialFormData = {
   description: "",
   category: [],
   status: "active",
-  price: 0,
-  originalPrice: 0,
+  price: "",
+  originalPrice: "",
   isOnSale: false,
 };
 
@@ -92,7 +92,9 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const handleChange = (event) => {
     //form에 데이터 넣어주기
     const { id, value } = event.target;
-    setFormData({ ...formData, [id]: value });
+    // SKU 필드의 경우 trim 적용
+    const processedValue = id === "sku" ? value.trim() : value;
+    setFormData({ ...formData, [id]: processedValue });
   };
 
   const addStock = () => {
@@ -146,11 +148,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
           <Modal.Title>Edit Product</Modal.Title>
         )}
       </Modal.Header>
-      {error && (
-        <div className="error-message">
-          <Alert variant="danger">{error}</Alert>
-        </div>
-      )}
       <Form className="form-container" onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="sku">
@@ -285,7 +282,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
               required
               onChange={handleChange}
               type="number"
-              placeholder="0"
             />
           </Form.Group>
 
@@ -296,7 +292,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
               required
               onChange={handleChange}
               type="number"
-              placeholder="0"
             />
           </Form.Group>
 
@@ -351,6 +346,11 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
             </Form.Select>
           </Form.Group>
         </Row>
+        {error && (
+          <div className="error-message mb-3">
+            <Alert variant="danger">{error}</Alert>
+          </div>
+        )}
         {mode === "new" ? (
           <Button variant="primary" type="submit">
             Submit

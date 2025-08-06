@@ -409,7 +409,7 @@
 .admin-modal .alert {
     border-radius: 0;
     border: none;
-    margin: 20px 30px;
+    margin: 20px 0;
     font-size: 1rem;
 }
 
