@@ -6,6 +6,7 @@ import { CATEGORY, STATUS, SIZE } from "../../../constants/product.constants";
 import "../style/adminProduct.style.css";
 import {
   clearError,
+  clearSuccess,
   createProduct,
   editProduct,
 } from "../../../features/product/productSlice";
@@ -33,15 +34,24 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const [stock, setStock] = useState([]);
   const dispatch = useDispatch();
   const [stockError, setStockError] = useState(false);
+  const [priceError, setPriceError] = useState("");
+  const [stockQuantityError, setStockQuantityError] = useState("");
+  const [requiredFieldError, setRequiredFieldError] = useState("");
 
   useEffect(() => {
-    if (success) setShowDialog(false);
-  }, [success]);
-
-  useEffect(() => {
-    if (error || !success) {
-      dispatch(clearError());
+    if (success) {
+      setShowDialog(false);
+      setFormData({ ...InitialFormData });
+      setStock([]);
+      setStockError(false);
+      setPriceError("");
+      setStockQuantityError("");
+      setRequiredFieldError("");
+      dispatch(clearSuccess());
     }
+  }, [success, dispatch]);
+
+  useEffect(() => {
     if (showDialog) {
       if (mode === "edit") {
         setFormData(selectedProduct);
@@ -62,21 +72,116 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     setFormData({ ...InitialFormData });
     setStock([]);
     setStockError(false);
+    setPriceError("");
+    setStockQuantityError("");
+    setRequiredFieldError("");
     setShowDialog(false);
+    dispatch(clearError());
+    dispatch(clearSuccess());
+  };
+
+  // 모달 강제 닫기 함수
+  const forceCloseModal = () => {
+    setShowDialog(false);
+    setFormData({ ...InitialFormData });
+    setStock([]);
+    setStockError(false);
+    setPriceError("");
+    setStockQuantityError("");
+    setRequiredFieldError("");
+    dispatch(clearError());
+    dispatch(clearSuccess());
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (stock.length === 0) return setStockError(true);
+
+    // 모든 에러 상태 초기화
     setStockError(false);
+    setPriceError("");
+    setStockQuantityError("");
+    setRequiredFieldError("");
+
+    // 필수 필드 검증
+    if (
+      !formData.sku ||
+      !formData.name ||
+      !formData.description ||
+      !formData.image ||
+      formData.category.length === 0
+    ) {
+      setRequiredFieldError("모든 필수 필드를 입력해주세요.");
+      return;
+    }
+
+    if (stock.length === 0) {
+      setStockError(true);
+      return;
+    }
+
+    // 재고 수량 검증
+    for (let i = 0; i < stock.length; i++) {
+      if (stock[i][1] && stock[i][2]) {
+        const quantity = parseInt(stock[i][2]);
+        if (quantity < 0) {
+          setStockQuantityError("재고 수량은 0 이상의 값을 입력해주세요.");
+          return;
+        }
+      }
+    }
+
+    // 원가 검증
+    if (!formData.originalPrice || parseFloat(formData.originalPrice) <= 0) {
+      setPriceError("원가는 0보다 큰 값을 입력해주세요.");
+      return;
+    }
+
+    // 할인가 검증 (할인 적용 시)
+    if (
+      formData.isOnSale &&
+      (!formData.price || parseFloat(formData.price) <= 0)
+    ) {
+      setPriceError("할인가는 0보다 큰 값을 입력해주세요.");
+      return;
+    }
+
+    // 할인가가 원가보다 크거나 같은 경우
+    if (
+      formData.isOnSale &&
+      parseFloat(formData.price) >= parseFloat(formData.originalPrice)
+    ) {
+      setPriceError("할인가는 원가보다 작은 값을 입력해주세요.");
+      return;
+    }
+
     const totalStock = stock.reduce((total, item) => {
       if (item[1] && item[2]) {
         return { ...total, [item[1]]: parseInt(item[2]) };
       }
       return total;
     }, {});
+
+    const submitData = {
+      ...formData,
+      stock: totalStock,
+      price: formData.isOnSale ? formData.price : formData.originalPrice,
+      originalPrice: formData.originalPrice,
+    };
+
     if (mode === "new") {
-      dispatch(createProduct({ ...formData, stock: totalStock }));
+      dispatch(createProduct(submitData));
+      // 강제로 모달 닫기 타이머 추가
+      setTimeout(() => {
+        if (showDialog) {
+          setShowDialog(false);
+          setFormData({ ...InitialFormData });
+          setStock([]);
+          setStockError(false);
+          setPriceError("");
+          setStockQuantityError("");
+          setRequiredFieldError("");
+        }
+      }, 2000);
     } else {
     }
   };
@@ -124,7 +229,13 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   };
 
   return (
-    <Modal show={showDialog} onHide={handleClose} className="admin-modal">
+    <Modal
+      show={showDialog}
+      onHide={handleClose}
+      className="admin-modal"
+      backdrop="static"
+      keyboard={false}
+    >
       <Modal.Header closeButton>
         {mode === "new" ? (
           <Modal.Title>Create New Product</Modal.Title>
@@ -230,9 +341,12 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
           </div>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="Image" required>
-          <Form.Label>Image</Form.Label>
+        <Form.Group className="mb-3" controlId="Image">
+          <Form.Label>Image *</Form.Label>
           <CloudinaryUploadWidget uploadImage={uploadImage} />
+          {!formData.image && (
+            <div className="text-danger mt-1">이미지를 업로드해주세요</div>
+          )}
 
           {formData.image && (
             <div
@@ -266,33 +380,45 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
               required
               onChange={handleChange}
               type="number"
+              placeholder="Enter original price"
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="price">
-            <Form.Label>Sale Price</Form.Label>
-            <Form.Control
-              value={formData.price}
-              required
-              onChange={handleChange}
-              type="number"
-            />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="isOnSale">
-            <Form.Label>On Sale</Form.Label>
-            <Form.Select
-              value={formData.isOnSale ? "true" : "false"}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  isOnSale: e.target.value === "true",
-                })
-              }
-            >
-              <option value="false">No</option>
-              <option value="true">Yes</option>
-            </Form.Select>
+            <div className="price-labels-row">
+              <Form.Label>Sale Price</Form.Label>
+              <div className="sale-toggle-container">
+                <div
+                  className={`sale-toggle ${formData.isOnSale ? "active" : ""}`}
+                >
+                  <span className="toggle-label">Original</span>
+                  <div
+                    className="toggle-switch"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        isOnSale: !formData.isOnSale,
+                      })
+                    }
+                  >
+                    <div className="toggle-slider"></div>
+                  </div>
+                  <span className="toggle-label">Sale</span>
+                </div>
+              </div>
+            </div>
+            <div className="sale-price-container">
+              <Form.Control
+                value={formData.price}
+                required
+                onChange={handleChange}
+                type="number"
+                placeholder="Enter sale price"
+                className="sale-price-input"
+                disabled={!formData.isOnSale}
+              />
+              {formData.isOnSale && <div className="sale-badge">SALE</div>}
+            </div>
           </Form.Group>
         </Row>
 
@@ -330,11 +456,31 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
             </Form.Select>
           </Form.Group>
         </Row>
+
         {error && (
           <div className="error-message mb-3">
             <Alert variant="danger">{error}</Alert>
           </div>
         )}
+
+        {priceError && (
+          <div className="error-message mb-3">
+            <Alert variant="danger">{priceError}</Alert>
+          </div>
+        )}
+
+        {stockQuantityError && (
+          <div className="error-message mb-3">
+            <Alert variant="danger">{stockQuantityError}</Alert>
+          </div>
+        )}
+
+        {requiredFieldError && (
+          <div className="error-message mb-3">
+            <Alert variant="danger">{requiredFieldError}</Alert>
+          </div>
+        )}
+
         {mode === "new" ? (
           <Button variant="primary" type="submit">
             Submit

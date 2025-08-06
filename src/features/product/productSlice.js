@@ -76,6 +76,8 @@ const productSlice = createSlice({
     },
     clearError: (state) => {
       state.error = "";
+    },
+    clearSuccess: (state) => {
       state.success = false;
     },
   },
@@ -109,6 +111,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { setSelectedProduct, setFilteredList, clearError } =
+export const { setSelectedProduct, setFilteredList, clearError, clearSuccess } =
   productSlice.actions;
 export default productSlice.reducer;

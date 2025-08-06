@@ -10,7 +10,12 @@ const ProductCard = ({ item }) => {
   };
 
   const calculateDiscountRate = (originalPrice, currentPrice) => {
-    if (!originalPrice || !currentPrice || originalPrice <= currentPrice)
+    if (
+      !originalPrice ||
+      !currentPrice ||
+      originalPrice <= currentPrice ||
+      currentPrice <= 0
+    )
       return 0;
     return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
   };
@@ -44,7 +49,7 @@ const ProductCard = ({ item }) => {
             </>
           ) : (
             <span className="current-price">
-              KRW {currencyFormat(currentPrice)}
+              KRW {currencyFormat(originalPrice)}
             </span>
           )}
         </div>

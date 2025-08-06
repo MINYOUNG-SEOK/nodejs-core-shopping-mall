@@ -285,8 +285,8 @@
     font-weight: 400;
     text-transform: uppercase;
     color: #000000;
-    margin-bottom: 10px;
     display: block;
+    margin-bottom: 10px;
 }
 
 .admin-modal .form-control,
@@ -703,4 +703,127 @@
         border-bottom: 1px solid #000000;
         color: #000000;
     }
+}
+
+.sale-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.sale-toggle {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 3px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.sale-toggle.active {
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+
+.toggle-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6c757d;
+    margin: 0 6px;
+    transition: color 0.3s ease;
+}
+
+.sale-toggle.active .toggle-label:last-child {
+    color: #d63384;
+    font-weight: 600;
+}
+
+.sale-toggle:not(.active) .toggle-label:first-child {
+    color: #198754;
+    font-weight: 600;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 2px;
+}
+
+.sale-toggle.active .toggle-switch {
+    background: #d63384;
+}
+
+.toggle-slider {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+}
+
+.sale-toggle.active .toggle-slider {
+    transform: translateX(20px);
+}
+
+.price-labels-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sale-price-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.sale-price-input {
+    flex: 1;
+}
+
+.sale-price-input:disabled {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sale-price-input:enabled {
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+}
+
+.sale-badge {
+    position: absolute;
+    right: 10px;
+    background: #d63384;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.25);
+}
+
+.sale-price-input:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.25);
 }
