@@ -170,18 +170,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
     if (mode === "new") {
       dispatch(createProduct(submitData));
-      // 강제로 모달 닫기 타이머 추가
-      setTimeout(() => {
-        if (showDialog) {
-          setShowDialog(false);
-          setFormData({ ...InitialFormData });
-          setStock([]);
-          setStockError(false);
-          setPriceError("");
-          setStockQuantityError("");
-          setRequiredFieldError("");
-        }
-      }, 2000);
     } else {
     }
   };
