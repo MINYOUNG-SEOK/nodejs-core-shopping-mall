@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import ProductCard from "../LandingPage/components/ProductCard";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductList } from "../../features/product/productSlice";
+import Pagination from "../../common/component/Pagination";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const ProductsPage = () => {
   const [query] = useSearchParams();
   const category = query.get("category");
   const name = query.get("name");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   useEffect(() => {
     dispatch(
@@ -20,7 +23,21 @@ const ProductsPage = () => {
         name,
       })
     );
+    setCurrentPage(1);
   }, [query, dispatch]);
+
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return productList.slice(startIndex, endIndex);
+  }, [productList, currentPage, itemsPerPage]);
+
+  const totalPages = Math.ceil(productList.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="products-page">
@@ -37,7 +54,7 @@ const ProductsPage = () => {
         <Row>
           {loading ? (
             Array.from({ length: 6 }).map((_, index) => (
-              <Col lg={4} md={6} sm={12} key={`skeleton-${index}`}>
+              <Col lg={4} md={6} sm={6} xs={12} key={`skeleton-${index}`}>
                 <div className="product-skeleton">
                   <div className="skeleton-image"></div>
                   <div className="skeleton-content">
@@ -48,8 +65,8 @@ const ProductsPage = () => {
               </Col>
             ))
           ) : productList.length > 0 ? (
-            productList.map((item) => (
-              <Col lg={4} md={6} sm={12} key={item._id}>
+            paginatedProducts.map((item) => (
+              <Col lg={4} md={6} sm={6} xs={12} key={item._id}>
                 <ProductCard item={item} />
               </Col>
             ))
@@ -65,6 +82,15 @@ const ProductsPage = () => {
             </div>
           )}
         </Row>
+
+        {productList.length > 0 && totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            itemsPerPage={itemsPerPage}
+          />
+        )}
       </Container>
     </div>
   );

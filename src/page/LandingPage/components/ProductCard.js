@@ -9,14 +9,12 @@ const ProductCard = ({ item }) => {
     navigate(`/product/${id}`);
   };
 
-  // 할인율 계산
   const calculateDiscountRate = (originalPrice, currentPrice) => {
     if (!originalPrice || !currentPrice || originalPrice <= currentPrice)
       return 0;
     return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
   };
 
-  // 가격 정보
   const originalPrice = item?.originalPrice || item?.price;
   const currentPrice = item?.price;
   const isOnSale = item?.isOnSale || false;

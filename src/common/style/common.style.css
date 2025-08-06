@@ -1,44 +1,107 @@
-.ml-2{
+.ml-2 {
     margin-left: 20px;
 }
-.space-between{
+
+.space-between {
     justify-content: space-between;
 }
-.mb-2{
+
+.mb-2 {
     margin-bottom: 20px !important;
 }
 
-.mt-2{
+.mt-2 {
     margin-top: 20px !important;
 }
-.list-style-none{
+
+.list-style-none {
     list-style: none;
- }
- .display-center{
+}
+
+.display-center {
     display: flex;
     justify-content: center;
- }
- .display-space-between{
+}
+
+.display-space-between {
     display: flex;
     justify-content: space-between;
- }
- .display-flex{
+}
+
+.display-flex {
     display: flex;
-  }
-.display-none{
+}
+
+.display-none {
     display: none;
 }
 
-.overflow-x{
-    overflow-x:auto;
+.overflow-x {
+    overflow-x: auto;
     width: 100%;
 
 }
 
 .overflow-x::-webkit-scrollbar {
     display: none;
-  }
+}
 
-  .vh-100{
-    height:100vh;
-  }
+.vh-100 {
+    height: 100vh;
+}
+
+/* Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pagination-container .pagination {
+    margin: 0;
+    background: none;
+    border: none;
+}
+
+.pagination-container .page-link {
+    color: #333;
+    border: none;
+    background: none;
+    padding: 0.6rem 0.75rem;
+    margin: 0 4px;
+    border-radius: 0;
+    transition: none;
+    font-weight: normal;
+}
+
+.pagination-container .page-item:first-child .page-link,
+.pagination-container .page-item:nth-child(2) .page-link,
+.pagination-container .page-item:nth-last-child(2) .page-link,
+.pagination-container .page-item:last-child .page-link {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    color: #333;
+}
+
+.pagination-container .page-link:hover {
+    background: none;
+    border: none;
+    color: #333;
+}
+
+.pagination-container .page-item.active .page-link {
+    background: none;
+    border: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.pagination-container .page-item.disabled .page-link {
+    color: #999;
+    pointer-events: none;
+    background: none;
+    border: none;
+    font-weight: bold;
+}

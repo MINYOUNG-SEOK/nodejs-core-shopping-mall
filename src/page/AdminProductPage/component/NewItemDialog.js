@@ -45,9 +45,8 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (showDialog) {
       if (mode === "edit") {
         setFormData(selectedProduct);
-        // 객체형태로 온 stock을  다시 배열로 세팅해주기
         const sizeArray = Object.keys(selectedProduct.stock).map((size) => [
-          Date.now() + Math.random(), // 고유 ID 생성
+          Date.now() + Math.random(),
           size,
           selectedProduct.stock[size],
         ]);
@@ -60,7 +59,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   }, [showDialog]);
 
   const handleClose = () => {
-    //모든걸 초기화시키고;
     setFormData({ ...InitialFormData });
     setStock([]);
     setStockError(false);
@@ -69,62 +67,49 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //재고를 입력했는지 확인, 아니면 에러
     if (stock.length === 0) return setStockError(true);
     setStockError(false);
-    // 재고를 배열에서 객체로 바꿔주기
-    // [[id, 'M', 2]] 에서 {M:2}로
     const totalStock = stock.reduce((total, item) => {
       if (item[1] && item[2]) {
-        // size와 quantity가 모두 있는 경우만
         return { ...total, [item[1]]: parseInt(item[2]) };
       }
       return total;
     }, {});
     if (mode === "new") {
-      //새 상품 만들기
       dispatch(createProduct({ ...formData, stock: totalStock }));
     } else {
-      // 상품 수정하기
     }
   };
 
   const handleChange = (event) => {
-    //form에 데이터 넣어주기
     const { id, value } = event.target;
-    // SKU 필드의 경우 trim 적용
     const processedValue = id === "sku" ? value.trim() : value;
     setFormData({ ...formData, [id]: processedValue });
   };
 
   const addStock = () => {
-    //재고타입 추가시 배열에 새 배열 추가 (고유 ID 포함)
-    const newId = Date.now() + Math.random(); // 고유 ID 생성
+    const newId = Date.now() + Math.random();
     setStock([...stock, [newId, "", ""]]);
   };
 
   const deleteStock = (idx) => {
-    //재고 삭제하기 (인덱스 기반)
     const newStock = stock.filter((item, index) => index !== idx);
     setStock(newStock);
   };
 
   const handleSizeChange = (value, index) => {
-    //  재고 사이즈 변환하기
     const newStock = [...stock];
-    newStock[index][1] = value; // ID, size, quantity 구조
+    newStock[index][1] = value;
     setStock(newStock);
   };
 
   const handleStockChange = (value, index) => {
-    //재고 수량 변환하기
     const newStock = [...stock];
-    newStock[index][2] = value; // ID, size, quantity 구조
+    newStock[index][2] = value;
     setStock(newStock);
   };
 
   const onHandleCategory = (event) => {
-    // 단일 카테고리 선택
     setFormData({
       ...formData,
       category: [event.target.value],
@@ -132,7 +117,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   };
 
   const uploadImage = (url) => {
-    //이미지 업로드
     setFormData((prevData) => {
       const newData = { ...prevData, image: url };
       return newData;
