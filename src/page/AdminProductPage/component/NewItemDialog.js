@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Modal, Button, Row, Col, Alert } from "react-bootstrap";
+import { Form, Modal, Button, Row, Col, Alert, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CloudinaryUploadWidget from "../../../utils/CloudinaryUploadWidget";
 import { CATEGORY, STATUS, SIZE } from "../../../constants/product.constants";
@@ -25,7 +25,7 @@ const InitialFormData = {
 };
 
 const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
-  const { error, success, selectedProduct } = useSelector(
+  const { error, success, selectedProduct, loading } = useSelector(
     (state) => state.product
   );
   const [formData, setFormData] = useState(
@@ -470,12 +470,40 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
         )}
 
         {mode === "new" ? (
-          <Button variant="primary" type="submit">
-            Submit
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  className="me-2"
+                />
+                Creating...
+              </>
+            ) : (
+              "Submit"
+            )}
           </Button>
         ) : (
-          <Button variant="primary" type="submit">
-            Edit
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  className="me-2"
+                />
+                Updating...
+              </>
+            ) : (
+              "Edit"
+            )}
           </Button>
         )}
       </Form>
